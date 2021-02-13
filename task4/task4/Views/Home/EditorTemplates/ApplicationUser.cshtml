@@ -1,0 +1,25 @@
+﻿@model task4.Areas.Identity.Data.ApplicationUser
+@Html.HiddenFor(user => user.Id)
+<tr>
+    <th>
+        @Html.CheckBoxFor(user => user.IsSelected, new { @class = "checkBox" })
+    </th>
+    <th>
+        @Html.DisplayFor(user => user.Id)
+    </th>
+    <td>
+        @Html.DisplayFor(user => user.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(user => user.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(user => user.RegistrationDate)
+    </td>
+    <td>
+        @Html.DisplayFor(user => user.LastLoginTime)
+    </td>
+    <td>
+        @Html.DisplayFor(user => user.LockoutEnabled)
+    </td>
+</tr>
