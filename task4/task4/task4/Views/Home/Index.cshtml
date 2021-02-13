@@ -1,0 +1,46 @@
+﻿@model IEnumerable<task4.Areas.Identity.Data.ApplicationUser>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+@using (Html.BeginForm(Html.BeginForm("Index", "Home", FormMethod.Post)))
+{
+<div class="btn-group toolbar" role="group" aria-label="Basic example">
+    <button type="submit" name="action" value="DeleteSelected">Delete</button>>
+    <button type="submit" name="action" value="BlockSelected">Block</button>>
+    <button type="submit" name="action" value="UnblockSelected">Unblock</button>>
+</div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>
+                    <input type="checkbox" id="checkAll"> &nbsp;
+                    Select all
+                </td>
+                <th>
+                    Id
+                </th>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Email
+                </td>
+                <td>
+                    RegistrationDate
+                </td>
+                <td>
+                    LastLoginTime
+                </td>
+                <td>
+                    IsBlocked
+                </td>
+            </tr>
+        </thead>
+        @Html.EditorForModel();
+
+    </table>
+}
