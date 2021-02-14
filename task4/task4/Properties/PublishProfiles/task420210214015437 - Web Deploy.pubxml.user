@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="AuthDbContextConnection">
-      <Value>Server=task4dbserver.database.windows.net%3bDatabase=task4_db%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+      <Value>Server=task4dbserver.database.windows.net%3bDatabase=task4_db%3bTrusted_Connection=false%3bMultipleActiveResultSets=true%3bUser Id=Alex%40task4dbserver%3bPassword=Priv_et36leuh%3bApplication Name=EntityFramework</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>
