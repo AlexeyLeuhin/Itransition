@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\itra\\task4\\task4\\task4\\task4.csproj": {}
+    "D:\\itra\\itra_rep\\task4\\task4\\task4.csproj": {}
   },
   "projects": {
-    "D:\\itra\\task4\\task4\\task4\\task4.csproj": {
+    "D:\\itra\\itra_rep\\task4\\task4\\task4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\itra\\task4\\task4\\task4\\task4.csproj",
+        "projectUniqueName": "D:\\itra\\itra_rep\\task4\\task4\\task4.csproj",
         "projectName": "task4",
-        "projectPath": "D:\\itra\\task4\\task4\\task4\\task4.csproj",
+        "projectPath": "D:\\itra\\itra_rep\\task4\\task4\\task4.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\itra\\task4\\task4\\task4\\obj\\",
+        "outputPath": "D:\\itra\\itra_rep\\task4\\task4\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

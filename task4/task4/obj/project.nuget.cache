@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sxVTMb/1gIYdEE21XuOJLq1VGi07Dg+bOUDxaxwk6moNNnm4UWNN0s2aNimkiOipvntZgyjeCEp+ezAu1JMNEQ==",
+  "dgSpecHash": "pB/l61pj463sVgGsMGPtNOjn1g/UgxIlWfKBaJc9ZgsU1fN5lYG8XeBDCOhkiJgspzq8ObrPbLZ6bSHsnouEqQ==",
   "success": true,
-  "projectFilePath": "D:\\itra\\task4\\task4\\task4\\task4.csproj",
+  "projectFilePath": "D:\\itra\\itra_rep\\task4\\task4\\task4.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
