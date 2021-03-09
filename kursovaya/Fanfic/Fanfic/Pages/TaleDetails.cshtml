@@ -1,0 +1,48 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Fanfic.Data
+@model Fanfic.Areas.TaleDetails.TaleDetailsModel
+@{
+    Layout = "../Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container row">
+    <div class="col-4 container tale-details-container">
+        <label>@Model.Tale.Name</label>
+        @if (Model.IsAuthor)
+        {
+            <ul class="list-group" id="items">
+                @foreach (var chapter in Model.Tale.Chapters)
+                {
+                    <li class="list-group-item">
+                        <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
+                    </li>
+                } 
+            </ul>
+            <form asp-page-handler="AddChapter" method="post">
+                <button class="btn-primary">Add chapter</button>
+                <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />
+            </form>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var chapter in Model.Tale.Chapters)
+                {
+                    <li class="list-group-item">                       
+                        <label>@chapter.Name</label>
+                    </li>
+                }
+            </ul>
+        }
+
+
+
+    </div>
+    <div class="col-7 container tale-details-container">
+        hi
+    </div>
+
+</div>
+

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fanfic", "Fanfic\Fanfic.csproj", "{FC86F30B-790D-4A20-8FB3-10D0C70FAFA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC86F30B-790D-4A20-8FB3-10D0C70FAFA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC86F30B-790D-4A20-8FB3-10D0C70FAFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC86F30B-790D-4A20-8FB3-10D0C70FAFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC86F30B-790D-4A20-8FB3-10D0C70FAFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EA6B373-6658-48B1-B7B8-AB2A2DA7C349}
+	EndGlobalSection
+EndGlobal
