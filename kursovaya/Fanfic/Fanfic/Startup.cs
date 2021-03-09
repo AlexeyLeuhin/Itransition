@@ -1,4 +1,5 @@
 using Fanfic.Data;
+using Fanfic.Hubs;
 using Fanfic.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,6 +58,7 @@ namespace Fanfic
                  });
 
             services.AddCoreAdmin();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +89,7 @@ namespace Fanfic
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<TaleDetailsHub>("/taleRedactor");
             });
         }
     }

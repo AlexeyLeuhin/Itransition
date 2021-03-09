@@ -15,15 +15,13 @@
             <ul class="list-group" id="items">
                 @foreach (var chapter in Model.Tale.Chapters)
                 {
-                    <li class="list-group-item">
+                    <li id="@chapter.Id" class="list-group-item">
                         <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
                     </li>
                 } 
-            </ul>
-            <form asp-page-handler="AddChapter" method="post">
-                <button class="btn-primary">Add chapter</button>
-                <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />
-            </form>
+            </ul>          
+                <button  onclick="addChapter();" class="btn-primary">Add chapter</button>
+                <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />          
         }
         else
         {

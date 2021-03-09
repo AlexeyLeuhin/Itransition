@@ -19,6 +19,13 @@
         "modular/sortable.core.esm.js",
         "modular/sortable.esm.js"
       ]
+    },
+    {
+      "library": "@microsoft/signalr@6.0.0-preview.1.21103.6",
+      "destination": "wwwroot/js/microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.min.js"
+      ]
     }
   ]
 }
