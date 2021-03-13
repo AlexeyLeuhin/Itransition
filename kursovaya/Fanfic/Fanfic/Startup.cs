@@ -1,5 +1,4 @@
 using Fanfic.Data;
-using Fanfic.Hubs;
 using Fanfic.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,9 +55,8 @@ namespace Fanfic
                      twitterOptions.ConsumerSecret = Configuration["Authentication-Twitter-ConsumerSecret"];
                      twitterOptions.RetrieveUserDetails = true;
                  });
-
             services.AddCoreAdmin();
-            services.AddSignalR();
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,11 +83,11 @@ namespace Fanfic
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<TaleDetailsHub>("/taleRedactor");
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+                
             });
         }
     }

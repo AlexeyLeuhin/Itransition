@@ -48,6 +48,31 @@ namespace Fanfic.Data.Migrations
                     b.ToTable("Chapters");
                 });
 
+            modelBuilder.Entity("Fanfic.Data.Rating", b =>
+                {
+                    b.Property<long>("RatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("TaleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RatingId");
+
+                    b.HasIndex("TaleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("Fanfic.Data.Tag", b =>
                 {
                     b.Property<long>("Id")
@@ -70,7 +95,10 @@ namespace Fanfic.Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AverageRating")
+                    b.Property<float>("AverageRating")
+                        .HasColumnType("real");
+
+                    b.Property<int>("ChaptersCount")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationTime")
@@ -332,6 +360,21 @@ namespace Fanfic.Data.Migrations
                     b.Navigation("Tale");
                 });
 
+            modelBuilder.Entity("Fanfic.Data.Rating", b =>
+                {
+                    b.HasOne("Fanfic.Data.Tale", "Tale")
+                        .WithMany()
+                        .HasForeignKey("TaleId");
+
+                    b.HasOne("Fanfic.Data.User", "User")
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Tale");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Fanfic.Data.Tale", b =>
                 {
                     b.HasOne("Fanfic.Data.User", "User")
@@ -414,6 +457,8 @@ namespace Fanfic.Data.Migrations
 
             modelBuilder.Entity("Fanfic.Data.User", b =>
                 {
+                    b.Navigation("Ratings");
+
                     b.Navigation("Tales");
                 });
 #pragma warning restore 612, 618

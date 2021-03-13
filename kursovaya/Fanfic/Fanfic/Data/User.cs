@@ -11,5 +11,6 @@ namespace Fanfic.Data
         public UInt16 Age { get; set; }
         public List<Tale> Tales { get; set; } = new List<Tale>();
         public string AvatarPath { get; set; }
+        public List<Rating> Ratings { get; set; } = new List<Rating>();
     }
 }

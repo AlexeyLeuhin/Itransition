@@ -26,5 +26,6 @@ namespace Fanfic.Data
 
         public DbSet<Tale> Tales { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }

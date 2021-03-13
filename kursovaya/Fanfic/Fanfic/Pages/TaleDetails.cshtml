@@ -1,13 +1,15 @@
 ﻿@page
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using Fanfic.Data
 @model Fanfic.Areas.TaleDetails.TaleDetailsModel
 @{
     Layout = "../Views/Shared/_Layout.cshtml";
+    Html.AntiForgeryToken();
 }
 
 
+
 <div class="container row">
+    <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />
     <div class="col-4 container tale-details-container">
         <label>@Model.Tale.Name</label>
         @if (Model.IsAuthor)
@@ -17,30 +19,67 @@
                 {
                     <li id="@chapter.Id" class="list-group-item">
                         <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
+                        <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </li>
-                } 
-            </ul>          
-                <button  onclick="addChapter();" class="btn-primary">Add chapter</button>
-                <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />          
+                }
+            </ul>
+            <button onclick="addChapter();" class="btn-primary">Add chapter</button>
         }
         else
         {
             <ul class="list-group">
                 @foreach (var chapter in Model.Tale.Chapters)
                 {
-                    <li class="list-group-item">                       
+                    <li class="list-group-item" id="@chapter.Id">
                         <label>@chapter.Name</label>
                     </li>
                 }
             </ul>
+            @if (Model.CanRate)
+            {
+                <h3>Leave your rating!</h3>
+                <input id="rating-id" type="text" class="rating" value="0" data-size="sm" data-show-clear="false" data-show-caption="false">
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+                <h3>You have already rated the tale!</h3>
+                <input type="text" class="rating" value="@Model.UserRating" data-size="sm" data-show-clear="false" data-show-caption="false"readonly="readonly">
+            }
+            else
+            {
+                <p> <a href="Identity/Account/Login?returnUrl=/TaleDetails?taleId=@Model.Tale.Id">Sign in</a> to leave your rating</p>
+            }
         }
 
 
 
     </div>
     <div class="col-7 container tale-details-container">
-        hi
+        <h3 id="chapterNameLabel"></h3>
+
+        @if (Model.IsAuthor)
+        {
+            <div class="container">
+                <textarea id="chapterText">
+                </textarea>
+                <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
+                <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
+                <button id="saveButton" hidden="hidden" onclick="saveChapterText();" class="btn-primary btn-success">Save changes</button>
+            </div>
+        }
+        else
+        {
+            <textarea id="chapterText" readonly="readonly">
+            </textarea>
+            <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
+            <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
+        }
+
     </div>
 
 </div>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/star-rating/star-rating.min.js"></script>
+<script src="~/js/taleDetails.js"></script>

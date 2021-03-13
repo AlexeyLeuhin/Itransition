@@ -7,6 +7,15 @@ namespace Fanfic.Data
 {
     public class Chapter
     {
+        public Chapter(Tale tale, string name, int serialNumber, string text = "", string pictureUrl = "")
+        {
+            this.Tale = tale;
+            this.Name = name;
+            this.SerialNumber = serialNumber;
+            this.Text = text;
+            this.PictureUrl = pictureUrl;
+        }
+
         public long Id { get; set; }
         public Tale Tale { get; set; }
         public string Name { get; set; }

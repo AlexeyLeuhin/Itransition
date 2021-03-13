@@ -1,0 +1,28 @@
+﻿@page
+@model Fanfic.Pages.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "../Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Latest created tales</h2>
+    <div class="row col-12">
+        @foreach (var tale in Model.DateSortedTales)
+        {
+
+
+            <div style="background-color:lavender; margin: 30px;">
+                <a href='/TaleDetails?taleId=@tale.Id'>@tale.Name</a>
+                <p>@tale.CreationTime</p>
+                <input id="input-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                <hr />
+            </div>
+        }
+    </div>
+
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/star-rating/star-rating.min.js"></script>
+<script src="~/js/index.js"></script>
