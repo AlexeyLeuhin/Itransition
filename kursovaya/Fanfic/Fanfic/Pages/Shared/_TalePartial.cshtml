@@ -1,0 +1,27 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Fanfic.Data
+@model Fanfic.Areas.Identity.Pages.Account.Manage.TalesModel
+
+@foreach (var tale in Model.Tales)
+{
+    <div class="current-tale">
+        <form asp-page-handler="RedirectToTaleDetails" method="post">
+            <button name="Id" value=@tale.Id>details</button>
+        </form>
+        <p>@tale.Id</p>
+        <p>@tale.Name</p>
+        <p>@tale.ShortDiscription</p>
+        <p>@tale.CreationTime.Date</p>
+        
+        <form asp-page-handler="DeleteTale" asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
+                                            asp-route-Id="@tale.Id" 
+                                            asp-route-sortType="@Model.PageInfo.SortType" 
+                                            asp-route-filterGanre="@Model.PageInfo.FilterGanre" method="post">
+            <button type="submit">Delete</button>
+        </form>
+        
+
+    </div>
+}
+
+

@@ -399,3 +399,5 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\ref\Fanfic.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Fanfic.pdb
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Fanfic.genruntimeconfig.cache
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\Shared\_TalePartial.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\Shared\_PaginationNavigation.cshtml.g.cs

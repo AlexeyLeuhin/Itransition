@@ -1,0 +1,50 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Fanfic.Areas.Identity.Pages.Account.Manage.TalesModel.PageStatus
+
+<div class="row">
+    @if (Model.Pagination.HasPreviousPage)
+    {
+        <a asp-page="Tales"
+           asp-route-sortType="@(Model.SortType)"
+           asp-route-filterGanre="@(Model.FilterGanre)"
+           asp-route-pageNumber=@(Model.Pagination.PageNumber - 1)>
+            Previous
+        </a>
+    }
+
+    @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
+    {
+        @if (i == Model.Pagination.PageNumber)
+        {
+            <div class="pagination-number-current">
+                <a asp-page="Tales"
+                   asp-route-sortType="@(Model.SortType)"
+                   asp-route-filterGanre="@(Model.FilterGanre)"
+                   asp-route-pageNumber=@(i)>
+                    @i
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="pagination-number">
+                <a asp-page="Tales"
+                   asp-route-sortType="@(Model.SortType)"
+                   asp-route-filterGanre="@(Model.FilterGanre)"
+                   asp-route-pageNumber=@(i)>
+                    @i
+                </a>
+            </div>
+        }
+
+    }
+    @if (Model.Pagination.HasNextPage)
+    {
+        <a asp-page="Tales"
+           asp-route-sortType="@(Model.SortType)"
+           asp-route-filterGanre="@(Model.FilterGanre)"
+           asp-route-pageNumber=@(Model.Pagination.PageNumber + 1)>
+            Next
+        </a>
+    }
+</div>

@@ -178,7 +178,7 @@ function onSelect(listElement){
     }
     listElement.classList.add("active");
     selectedItem = listElement;
-    document.getElementById("chapterNameLabel").textContent = listElement.children[0].textContent;
+    document.getElementById("chapterNameLabel").textContent = listElement.children[0].value;
 
     $.ajax({
         url: "TaleDetails?handler=ChapterText",

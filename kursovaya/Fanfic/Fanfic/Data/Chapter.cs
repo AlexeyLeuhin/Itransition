@@ -7,6 +7,11 @@ namespace Fanfic.Data
 {
     public class Chapter
     {
+
+        public Chapter()
+        {
+
+        }
         public Chapter(Tale tale, string name, int serialNumber, string text = "", string pictureUrl = "")
         {
             this.Tale = tale;

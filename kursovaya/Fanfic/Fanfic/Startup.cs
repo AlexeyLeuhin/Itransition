@@ -1,5 +1,7 @@
 using Fanfic.Data;
 using Fanfic.Services;
+using Fanfic.Services.Filtrator;
+using Fanfic.Services.Sorter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,8 @@ namespace Fanfic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ITaleFilterService, TaleFiltator>();
+            services.AddTransient<ITaleSortService, TaleSorter>();
             services.AddTransient<IBlobService, BlobService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

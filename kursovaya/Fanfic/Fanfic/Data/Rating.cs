@@ -7,6 +7,12 @@ namespace Fanfic.Data
 {
     public class Rating
     {
+
+        public Rating()
+        {
+
+        }
+
         public Rating(User user, Tale tale, int points)
         {
             User = user;

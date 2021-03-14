@@ -8,6 +8,19 @@ namespace Fanfic.Data
 {
     public class Tale
     {
+        public Tale()
+        {
+
+        }
+
+        public Tale(User user, string name, string shortDiscription, TaleGanre ganre, DateTime creationTime)
+        {
+            User = user;
+            Name = name;
+            ShortDiscription = shortDiscription;
+            Ganre = ganre;
+            CreationTime = creationTime;
+        }
 
         public enum TaleGanre
         {
@@ -27,8 +40,8 @@ namespace Fanfic.Data
         public string ShortDiscription { get; set; }
         public TaleGanre Ganre { get; set; }
         public List<Tag> Tags { get; set; } = new List<Tag>();
-        public float AverageRating { get; set; }
-        public long NumberOfRatings { get; set; }
+        public float AverageRating { get; set; } = 0;
+        public long NumberOfRatings { get; set; } = 0;
         public List<Chapter> Chapters { get; set; } = new List<Chapter>();
         public DateTime CreationTime { get; set; }
         public int ChaptersCount { get; set; } = 0;

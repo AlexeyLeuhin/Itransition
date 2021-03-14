@@ -4,23 +4,47 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanfic.Data;
+using Fanfic.Services.Filtrator;
+using Fanfic.Services.Sorter;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using static Fanfic.Data.Tale;
 
 namespace Fanfic.Areas.Identity.Pages.Account.Manage
 {
+    
+
+
     public class TalesModel : PageModel
     {
-
+        private const int pageSize = 5;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<User> _userManager;
+        private readonly ITaleSortService _taleSorter;
+        private readonly ITaleFilterService _taleFiltrator;
         public List<Tale> Tales { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; } = new InputModel();
+        public PageStatus PageInfo { get; set; }
+        public class PageStatus
+        {
+            public PageStatus()
+            {
+
+            }
+            public PageStatus(SortState sortType, TaleGanre? filterGanre)
+            {
+                SortType = sortType;
+                FilterGanre = filterGanre;
+            }
+            public SortState SortType { get; set; }
+            public TaleGanre? FilterGanre { get; set; }
+            public PaginationModel Pagination { get; set; }
+        }
 
         public class InputModel
         { 
@@ -37,35 +61,67 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             public string ShortDescription { get; set; }
         }
 
-        public TalesModel (ApplicationDbContext dbContext, UserManager<User> userManager)
+        public class PaginationModel
+        {
+                public int PageNumber { get; private set; }
+                public int TotalPages { get; private set; }
+
+                public PaginationModel()
+                {   
+
+                }
+                public PaginationModel(long dataSize, int pageNumber, int pageSize)
+                {
+                    PageNumber = pageNumber;
+                    TotalPages = (int)Math.Ceiling(dataSize / (double)pageSize);
+                }
+
+                public bool HasPreviousPage
+                {
+                    get
+                    {
+                        return (PageNumber > 1);
+                    }
+                }
+
+                public bool HasNextPage
+                {
+                    get
+                    {
+                        return (PageNumber < TotalPages);
+                    }
+                }
+        }
+
+        public TalesModel (ApplicationDbContext dbContext, UserManager<User> userManager, ITaleSortService taleSorter, ITaleFilterService taleFiltrator)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _taleSorter = taleSorter;
+            _taleFiltrator = taleFiltrator;
         }
 
-        public async Task LoadAsync()
+        public async Task LoadAsync(TaleGanre? sortGanre, SortState sortType, int page)
         {
+            
             var user = await _userManager.GetUserAsync(User);
-            Tales = _dbContext.Tales.Where<Tale>(tale => tale.User == user).ToList();
+            IQueryable<Tale> tales = _dbContext.Tales.Where<Tale>(tale => tale.User == user);
+            tales = _taleFiltrator.FilterByGanre(tales, sortGanre);
+            tales = _taleSorter.Sort(tales, sortType);
+            await Paginate(tales, page, await tales.CountAsync());
+
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        private async Task Paginate(IQueryable<Tale> tales, int page, long dataSize)
         {
-            await LoadAsync();
-            return Page();
+            Tales = await tales.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            PageInfo.Pagination = new PaginationModel(dataSize, page, pageSize);
         }
 
-        public async Task<IActionResult> OnPostSortByRating()
+        public async Task<IActionResult> OnGetAsync(TaleGanre? filterGanre, SortState sortType = SortState.Alphabet, int pageNumber = 1)
         {
-            await LoadAsync();
-            Tales.Sort((tale1, tale2) => { return tale1.AverageRating.CompareTo(tale2.AverageRating); });
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostSortByCreationDate()
-        {
-            await LoadAsync();
-            Tales.Sort((tale1, tale2) => { return tale2.CreationTime.CompareTo(tale1.CreationTime); });
+            PageInfo = new PageStatus(sortType, filterGanre);
+            await LoadAsync(filterGanre, sortType, pageNumber);
             return Page();
         }
         
@@ -79,18 +135,21 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
         {
             if (!ModelState.IsValid)
             {
-                await OnGetAsync();
+                await OnGetAsync(null);
                 return null;
             }
-            Tale tale = new Tale();
-            tale.Name = Input.Name;
-            tale.ShortDiscription = Input.ShortDescription;
-            tale.User = _userManager.GetUserAsync(User).Result;
-            tale.Ganre = Input.Ganre;
-            tale.CreationTime = DateTime.Now;
+            Tale tale = new Tale(_userManager.GetUserAsync(User).Result, Input.Name, Input.ShortDescription, Input.Ganre, DateTime.Now);
             await _dbContext.AddAsync(tale);
             _dbContext.SaveChanges();     
             return RedirectToPage("Tales");
+        }
+
+        public async Task<IActionResult> OnPostDeleteTale(long Id, int pageNumber, SortState sortType, TaleGanre? filterGanre)
+        {
+            Tale tale = _dbContext.Tales.Include(c =>c.Chapters).FirstOrDefault(t => t.Id == Id);
+            _dbContext.Remove(tale);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToPage("Tales", new { pageNumber, sortType, filterGanre });
         }
     }
 }

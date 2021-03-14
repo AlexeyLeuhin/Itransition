@@ -2,6 +2,7 @@
 @using Fanfic.Data
 @model Fanfic.Areas.Identity.Pages.Account.Manage.TalesModel
 @{
+    
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -10,14 +11,6 @@
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div id="tales">
-    <form asp-page-handler="SortByRating" method="post">
-        <button class="btn btn-default">sort by rating</button>
-    </form>
-
-    <form asp-page-handler="SortByCreationDate" method="post">
-        <button class="btn btn-default">sort by creation date</button>
-    </form>
-
     <a href="#createTale" class="btn btn-success" data-toggle="modal"><span>Add New Tale</span></a>
 
     <!-- Create Tale Modal -->
@@ -59,27 +52,31 @@
         </div>
     </div>
     <!-- -->
-    <div class="container">
-        @if (Model.Tales.Count == 0)
-        {
-            <p>You have no tales. Lets create a new one!</p>
-        }
-        else
-        {
-            @foreach (var tale in Model.Tales)
+    <div class="container row">
+        <div class="col-8">
+            @if (Model.Tales.Count == 0)
             {
-                <div class="current-tale">
-                    <form  asp-page-handler="RedirectToTaleDetails"  method="post">          
-                        <button name="Id" value=@tale.Id>details</button>
-                    </form>
-                    <p>@tale.Id</p>
-                    <p>@tale.Name</p>
-                    <p>@tale.ShortDiscription</p>
-                    <p>@tale.CreationTime.Date</p>
-
-                </div>
+                <p>Tales not found</p>
             }
-        }
+            else
+            {
+                @await Html.PartialAsync("_TalePartial", Model)
+            }
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <label>Filter by ganre:</label>
+                <select name="filterGanre" asp-items="@Html.GetEnumSelectList<Tale.TaleGanre>()" class="form-control">
+                    <option value="">All</option>
+                </select>
+                <label>Sort by:</label>
+                <select name="sortType" asp-items="@Html.GetEnumSelectList<Fanfic.Services.Sorter.SortState>()" class="form-control">
+                </select>
+                <input type="submit" value="Filter" class="btn btn-outline-dark" />
+            </form>
+        </div>
+
     </div>
-    
+
+    @await Html.PartialAsync("_PaginationNavigation", Model.PageInfo)
 </div>
