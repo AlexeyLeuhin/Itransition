@@ -46,5 +46,6 @@ namespace Fanfic.Data
         public List<Chapter> Chapters { get; set; } = new List<Chapter>();
         public DateTime CreationTime { get; set; }
         public int ChaptersCount { get; set; } = 0;
+        public List<Comment> Comments { get; set; } = new List<Comment>();
      }
 }

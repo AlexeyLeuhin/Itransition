@@ -4,14 +4,16 @@ using Fanfic.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fanfic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210317164021_Add-Comments")]
+    partial class AddComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,14 +69,9 @@ namespace Fanfic.Data.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("TaleId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("CommentId");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("TaleId");
 
                     b.ToTable("Comments");
                 });
@@ -419,10 +416,6 @@ namespace Fanfic.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Fanfic.Data.Tale", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("TaleId");
-
                     b.Navigation("Author");
                 });
 
@@ -537,8 +530,6 @@ namespace Fanfic.Data.Migrations
             modelBuilder.Entity("Fanfic.Data.Tale", b =>
                 {
                     b.Navigation("Chapters");
-
-                    b.Navigation("Comments");
 
                     b.Navigation("Ratings");
                 });

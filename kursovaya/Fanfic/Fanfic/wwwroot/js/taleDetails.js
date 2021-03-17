@@ -1,5 +1,6 @@
 ﻿var draggableList = document.getElementById('items');
 var taleId = Number(document.getElementById('taleId').value);
+var userId = document.getElementById("userId").value;
 var saveButton = document.getElementById("saveButton");
 var leftArrow = document.getElementById("leftArrow");
 var rightArrow = document.getElementById("rightArrow");
@@ -8,6 +9,17 @@ var dropFile = document.getElementById("divUploadFile");
 var listItems = document.getElementsByClassName("list-group-item");
 var shoulNotBeSelected = false;
 var likeButton = document.getElementById("likeButton");
+
+var hubConnectionComments = new signalR.HubConnectionBuilder()
+    .withUrl("/comments")
+    .build();
+
+hubConnectionComments.on("PostComment", function (comment) {
+    createNewCommentVisualization(comment.message, comment.createTime, comment.author.name);
+});
+
+hubConnectionComments.start();
+
 
 $(function () {
     $("#divUploadFile").filedrop({
@@ -308,4 +320,38 @@ function onLikePressed() {
             document.getElementById("likesNumber").textContent = response.chapterLikes;
         },
     });
+}
+
+function sendComment() {
+    commentText = document.getElementById("commentInput").value;
+    hubConnectionComments.invoke("PostComment", commentText, taleId, userId);
+    document.getElementById("commentInput").value = "";
+}
+
+function createNewCommentVisualization(commentText, time, authorName) {
+    let comment = document.createElement("div");
+    comment.classList.add("container");
+    let txtdiv = document.createElement("div");
+    txtdiv.classList.add("row");
+    let txtarea = document.createElement("textarea");
+    txtarea.readOnly = true;
+    txtarea.value = commentText;
+    txtdiv.appendChild(txtarea);
+    comment.appendChild(txtdiv);
+    let infodiv = document.createElement("div");
+    infodiv.classList.add("row");
+    let timediv = document.createElement("div");
+    timediv.classList.add("col-6");
+    let timelbl = document.createElement("label");
+    timelbl.textContent = time;
+    timediv.appendChild(timelbl);
+    infodiv.appendChild(timediv);
+    let namediv = document.createElement("div");
+    namediv.classList.add("col-6");
+    let namelbl = document.createElement("label");
+    namelbl.textContent = authorName;
+    namediv.appendChild(namelbl);
+    infodiv.appendChild(namediv);
+    comment.appendChild(infodiv);
+    document.getElementById("comments").appendChild(comment);
 }

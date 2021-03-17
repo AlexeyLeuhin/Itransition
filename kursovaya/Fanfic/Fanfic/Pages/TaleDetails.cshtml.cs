@@ -20,6 +20,7 @@ namespace Fanfic.Areas.TaleDetails
         public bool CanRate { get; set; } = false;
         public int UserRating { get; set; }
         public List<long> UserLikedChaptersIds { get; set; }
+        public string UserId { get; set; }
 
         public TaleDetailsModel(UserManager<User> userManager, ApplicationDbContext dbContext)
         {
@@ -29,12 +30,16 @@ namespace Fanfic.Areas.TaleDetails
 
         public async Task LoadAsync(long taleId)
         {
-            Tale = _dbContext.Tales.Include(c => c.User).Include(c => c.Chapters).FirstOrDefault(t => t.Id == taleId);
+            Tale = _dbContext.Tales.Include(c => c.User).
+                Include(c => c.Chapters).
+                Include(c => c.Comments).ThenInclude(c => c.Author).
+                FirstOrDefault(t => t.Id == taleId);
             Tale.Chapters.Sort((chapter1, chapter2) => chapter1.SerialNumber.CompareTo(chapter2.SerialNumber));
             if (User.Identity.IsAuthenticated)
             {
                 User user = await _userManager.GetUserAsync(User);
                 user = _dbContext.Users.Include(c => c.Ratings).ThenInclude(c => c.Tale).FirstOrDefault(us => us.Id == user.Id);
+                UserId = user.Id;
                 IsAuthor = Tale.User.Id.CompareTo(user.Id) == 0 ? true : false;
                 Rating userRating = user.Ratings.FirstOrDefault(rate => rate.Tale.Id == taleId);
                 if (!IsAuthor && userRating == null)

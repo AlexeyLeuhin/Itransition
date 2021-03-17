@@ -2,6 +2,7 @@ using Fanfic.Data;
 using Fanfic.Services;
 using Fanfic.Services.Filtrator;
 using Fanfic.Services.Sorter;
+using Fanfic.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -61,6 +62,7 @@ namespace Fanfic
                  });
             services.AddCoreAdmin();
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +94,7 @@ namespace Fanfic
                     name: "default",
                     pattern: "{controller}/{action}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<CommentsHub>("/comments");
 
             });
         }

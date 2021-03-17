@@ -53,5 +53,6 @@ namespace Fanfic.Data
         public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

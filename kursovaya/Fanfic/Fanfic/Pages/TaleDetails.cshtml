@@ -10,20 +10,21 @@
 
 <div class="container row">
     <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />
+    <input type="hidden" id="userId" name="userId" value="@Model.UserId" />
     <div class="col-4 container tale-details-container">
         <label>@Model.Tale.Name</label>
         @if (Model.IsAuthor)
         {
-    <ul class="list-group" id="items">
-        @foreach (var chapter in Model.Tale.Chapters)
-        {
-        <li id="@chapter.Id" class="list-group-item">
-            <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
-            <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-        </li>
-            
-        }
-    </ul>
+            <ul class="list-group" id="items">
+                @foreach (var chapter in Model.Tale.Chapters)
+                {
+                    <li id="@chapter.Id" class="list-group-item">
+                        <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
+                        <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </li>
+
+                }
+            </ul>
             <button onclick="addChapter();" class="btn-primary">Add chapter</button>
         }
         else
@@ -32,7 +33,7 @@
                 @foreach (var chapter in Model.Tale.Chapters)
                 {
                     <li class="list-group-item" id="@chapter.Id">
-                        <input readonly="readonly" value="@chapter.Name"/>
+                        <input readonly="readonly" value="@chapter.Name" />
                     </li>
                 }
             </ul>
@@ -89,12 +90,39 @@
             <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
             <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
         }
+
         @if (User.Identity.IsAuthenticated)
         {
             <div class="row">
                 <button id="likeButton" onclick="onLikePressed();" class="transparent-button" hidden="hidden"></button>
                 <label id="likesNumber" hidden="hidden"></label>
             </div>
+            @if (!Model.IsAuthor)
+            {
+                <div class="form-group">
+                    <textarea id="commentInput"></textarea>
+                    <button class="btn-success" onclick="sendComment();">Send</button>
+                </div>
+                <div id="comments">
+                    @foreach (var comment in Model.Tale.Comments)
+                    {
+                        <div class="container">
+                            <div class="row">
+                                <textarea readonly="readonly">@comment.Message</textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>@comment.CreateTime</label>
+                                </div>
+                                <div class="col-6">
+                                    <label>@comment.Author.Name</label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
         }
         else
         {
@@ -109,6 +137,7 @@
 </div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
