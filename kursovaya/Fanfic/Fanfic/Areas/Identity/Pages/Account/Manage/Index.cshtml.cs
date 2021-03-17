@@ -139,7 +139,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             if (Avatar != null)
             {
                 string blobName = "user - " + user.Id + " - avatar";
-                user.AvatarPath = await _blobService.UploadAvatar(Avatar, blobName);
+                await _blobService.UploadToBlobContainerAsync(Avatar, blobName, "avatarcontainer");
             }
 
 

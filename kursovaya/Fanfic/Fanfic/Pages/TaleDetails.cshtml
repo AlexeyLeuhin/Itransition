@@ -14,15 +14,16 @@
         <label>@Model.Tale.Name</label>
         @if (Model.IsAuthor)
         {
-            <ul class="list-group" id="items">
-                @foreach (var chapter in Model.Tale.Chapters)
-                {
-                    <li id="@chapter.Id" class="list-group-item">
-                        <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
-                        <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                    </li>
-                }
-            </ul>
+    <ul class="list-group" id="items">
+        @foreach (var chapter in Model.Tale.Chapters)
+        {
+        <li id="@chapter.Id" class="list-group-item">
+            <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
+            <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        </li>
+            
+        }
+    </ul>
             <button onclick="addChapter();" class="btn-primary">Add chapter</button>
         }
         else
@@ -31,7 +32,7 @@
                 @foreach (var chapter in Model.Tale.Chapters)
                 {
                     <li class="list-group-item" id="@chapter.Id">
-                        <label>@chapter.Name</label>
+                        <input readonly="readonly" value="@chapter.Name"/>
                     </li>
                 }
             </ul>
@@ -43,7 +44,7 @@
             else if (User.Identity.IsAuthenticated)
             {
                 <h3>You have already rated the tale!</h3>
-                <input type="text" class="rating" value="@Model.UserRating" data-size="sm" data-show-clear="false" data-show-caption="false"readonly="readonly">
+                <input type="text" class="rating" value="@Model.UserRating" data-size="sm" data-show-clear="false" data-show-caption="false" readonly="readonly">
             }
             else
             {
@@ -57,11 +58,25 @@
     <div class="col-7 container tale-details-container">
         <h3 id="chapterNameLabel"></h3>
 
+        <div id="chaptersImages">
+            @foreach (var chapter in Model.Tale.Chapters)
+            {
+                <img id="chapterImage-@chapter.Id" src="@chapter.PictureUrl" hidden="hidden" width="40" height="40" />
+            }
+        </div>
         @if (Model.IsAuthor)
         {
+
             <div class="container">
+                <div id="divUploadFile" hidden="hidden" style="width:200px; height:100px; border:1px solid; text-align:center;">
+                    <p>Drop file here</p>
+                </div>
+                <button hidden="hidden" id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+                <img id="imgLoading" src="~/gifs/loading.gif" style="display:none; width:50px; height:50px;" />
+                <img id="chapterImage" />
+
                 <textarea id="chapterText">
-                </textarea>
+                        </textarea>
                 <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
                 <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
                 <button id="saveButton" hidden="hidden" onclick="saveChapterText();" class="btn-primary btn-success">Save changes</button>
@@ -74,6 +89,20 @@
             <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
             <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
         }
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="row">
+                <button id="likeButton" onclick="onLikePressed();" class="transparent-button" hidden="hidden"></button>
+                <label id="likesNumber" hidden="hidden"></label>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <a id="likeButton" href="Identity/Account/Login?returnUrl=/TaleDetails?taleId=@Model.Tale.Id" class="transparent-button" hidden="hidden"></a>
+                <label id="likesNumber" hidden="hidden"></label>
+            </div>
+        }
 
     </div>
 
@@ -81,6 +110,8 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="~/lib/star-rating/star-rating.min.js"></script>
 <script src="~/js/sortablejs/Sortable.js"></script>
 <script src="~/js/taleDetails.js"></script>

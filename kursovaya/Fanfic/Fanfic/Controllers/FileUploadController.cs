@@ -16,10 +16,12 @@ namespace Fanfic.Controllers
 
         private readonly UserManager<User> _userManager;
         private readonly IBlobService _blobService;
-        public FileUploadController(UserManager<User> userManager, IBlobService blobService)
+        private readonly ApplicationDbContext _dbContext;
+        public FileUploadController(UserManager<User> userManager, IBlobService blobService, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _blobService = blobService;
+            _dbContext = dbContext;
         }
 
         [HttpPost]
@@ -27,9 +29,21 @@ namespace Fanfic.Controllers
         {   
             var user = await _userManager.GetUserAsync(User);
             string blobName = "user - " + user.Id + " - avatar";
-            user.AvatarPath = await _blobService.UploadAvatar(avatar, blobName);
+            user.AvatarPath = await _blobService.UploadToBlobContainerAsync(avatar, blobName, "avatarcontainer");    //to keystore
             await _userManager.UpdateAsync(user);
-            return null;    
+            return null;
+            
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadChapterImage(IFormFile chapterImage, long chapterId)
+        {
+            string blobName = "chapter-" + chapterId;
+            Chapter chapter = await _dbContext.Chapters.FindAsync(chapterId);
+            chapter.PictureUrl = await _blobService.UploadToBlobContainerAsync(chapterImage, blobName, "chapterimagecontainer");  //to keystore
+            _dbContext.Update(chapter);
+            await _dbContext.SaveChangesAsync();
+            return new JsonResult(chapter.PictureUrl);
         }
     }
 }

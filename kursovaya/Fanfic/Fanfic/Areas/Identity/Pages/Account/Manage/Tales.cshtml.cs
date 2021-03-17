@@ -103,13 +103,11 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
 
         public async Task LoadAsync(TaleGanre? sortGanre, SortState sortType, int page)
         {
-            
             var user = await _userManager.GetUserAsync(User);
             IQueryable<Tale> tales = _dbContext.Tales.Where<Tale>(tale => tale.User == user);
             tales = _taleFiltrator.FilterByGanre(tales, sortGanre);
             tales = _taleSorter.Sort(tales, sortType);
             await Paginate(tales, page, await tales.CountAsync());
-
         }
 
         private async Task Paginate(IQueryable<Tale> tales, int page, long dataSize)
@@ -131,7 +129,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             return Redirect(url);
         }
 
-        public async Task<IActionResult> OnPostCreateTale()
+        public async Task<IActionResult> OnPostCreateTale(int pageNumber, SortState sortType, TaleGanre? filterGanre)
         {
             if (!ModelState.IsValid)
             {
@@ -141,13 +139,12 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             Tale tale = new Tale(_userManager.GetUserAsync(User).Result, Input.Name, Input.ShortDescription, Input.Ganre, DateTime.Now);
             await _dbContext.AddAsync(tale);
             _dbContext.SaveChanges();     
-            return RedirectToPage("Tales");
+            return RedirectToPage("Tales", new { pageNumber, sortType, filterGanre });
         }
 
         public async Task<IActionResult> OnPostDeleteTale(long Id, int pageNumber, SortState sortType, TaleGanre? filterGanre)
         {
-            Tale tale = _dbContext.Tales.Include(c =>c.Chapters).FirstOrDefault(t => t.Id == Id);
-            _dbContext.Remove(tale);
+            await _dbContext.DeleteTale(Id);
             await _dbContext.SaveChangesAsync();
             return RedirectToPage("Tales", new { pageNumber, sortType, filterGanre });
         }

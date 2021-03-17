@@ -4,24 +4,25 @@
 
 @foreach (var tale in Model.Tales)
 {
-    <div class="current-tale">
-        <form asp-page-handler="RedirectToTaleDetails" method="post">
-            <button name="Id" value=@tale.Id>details</button>
-        </form>
-        <p>@tale.Id</p>
-        <p>@tale.Name</p>
-        <p>@tale.ShortDiscription</p>
-        <p>@tale.CreationTime.Date</p>
-        
-        <form asp-page-handler="DeleteTale" asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
-                                            asp-route-Id="@tale.Id" 
-                                            asp-route-sortType="@Model.PageInfo.SortType" 
-                                            asp-route-filterGanre="@Model.PageInfo.FilterGanre" method="post">
-            <button type="submit">Delete</button>
-        </form>
-        
+<div class="current-tale">
+    <form asp-page-handler="RedirectToTaleDetails" method="post">
+        <button name="Id" value=@tale.Id>details</button>
+    </form>
+    <p>@tale.Id</p>
+    <p>@tale.Name</p>
+    <p>@tale.ShortDiscription</p>
+    <p>@tale.CreationTime.Date</p>
+    <input type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly="readonly">
+    <p>@tale.NumberOfRatings votes</p>
+    <form asp-page-handler="DeleteTale" asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
+          asp-route-Id="@tale.Id"
+          asp-route-sortType="@Model.PageInfo.SortType"
+          asp-route-filterGanre="@Model.PageInfo.FilterGanre" method="post">
+        <button type="submit">Delete</button>
+    </form>
 
-    </div>
+
+</div>
 }
 
 

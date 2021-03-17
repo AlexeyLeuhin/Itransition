@@ -4,14 +4,16 @@ using Fanfic.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fanfic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210317080644_Likes-Add")]
+    partial class LikesAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace Fanfic.Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("LikesNumber")
+                    b.Property<int>("Likes")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -388,14 +390,16 @@ namespace Fanfic.Data.Migrations
             modelBuilder.Entity("Fanfic.Data.Like", b =>
                 {
                     b.HasOne("Fanfic.Data.Chapter", "Chapter")
-                        .WithMany("Likes")
+                        .WithMany()
                         .HasForeignKey("ChapterId");
 
-                    b.HasOne("Fanfic.Data.User", null)
+                    b.HasOne("Fanfic.Data.User", "User")
                         .WithMany("Likes")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Chapter");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Rating", b =>
@@ -486,11 +490,6 @@ namespace Fanfic.Data.Migrations
                         .HasForeignKey("TalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Fanfic.Data.Chapter", b =>
-                {
-                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Tale", b =>

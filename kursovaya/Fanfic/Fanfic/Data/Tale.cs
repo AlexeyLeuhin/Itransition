@@ -40,6 +40,7 @@ namespace Fanfic.Data
         public string ShortDiscription { get; set; }
         public TaleGanre Ganre { get; set; }
         public List<Tag> Tags { get; set; } = new List<Tag>();
+        public List<Rating> Ratings { get; set; } = new List<Rating>();
         public float AverageRating { get; set; } = 0;
         public long NumberOfRatings { get; set; } = 0;
         public List<Chapter> Chapters { get; set; } = new List<Chapter>();

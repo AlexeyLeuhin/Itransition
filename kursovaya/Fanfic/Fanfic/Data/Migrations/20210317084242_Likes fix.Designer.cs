@@ -4,14 +4,16 @@ using Fanfic.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fanfic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210317084242_Likes fix")]
+    partial class Likesfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,28 +51,6 @@ namespace Fanfic.Data.Migrations
                     b.HasIndex("TaleId");
 
                     b.ToTable("Chapters");
-                });
-
-            modelBuilder.Entity("Fanfic.Data.Like", b =>
-                {
-                    b.Property<long>("LikeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("ChapterId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LikeId");
-
-                    b.HasIndex("ChapterId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Like");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Rating", b =>
@@ -166,6 +146,9 @@ namespace Fanfic.Data.Migrations
                     b.Property<string>("AvatarPath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("ChapterId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -214,6 +197,8 @@ namespace Fanfic.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -385,19 +370,6 @@ namespace Fanfic.Data.Migrations
                     b.Navigation("Tale");
                 });
 
-            modelBuilder.Entity("Fanfic.Data.Like", b =>
-                {
-                    b.HasOne("Fanfic.Data.Chapter", "Chapter")
-                        .WithMany("Likes")
-                        .HasForeignKey("ChapterId");
-
-                    b.HasOne("Fanfic.Data.User", null)
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Chapter");
-                });
-
             modelBuilder.Entity("Fanfic.Data.Rating", b =>
                 {
                     b.HasOne("Fanfic.Data.Tale", "Tale")
@@ -420,6 +392,13 @@ namespace Fanfic.Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Fanfic.Data.User", b =>
+                {
+                    b.HasOne("Fanfic.Data.Chapter", null)
+                        .WithMany("UsersLiked")
+                        .HasForeignKey("ChapterId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -490,7 +469,7 @@ namespace Fanfic.Data.Migrations
 
             modelBuilder.Entity("Fanfic.Data.Chapter", b =>
                 {
-                    b.Navigation("Likes");
+                    b.Navigation("UsersLiked");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Tale", b =>
@@ -502,8 +481,6 @@ namespace Fanfic.Data.Migrations
 
             modelBuilder.Entity("Fanfic.Data.User", b =>
                 {
-                    b.Navigation("Likes");
-
                     b.Navigation("Ratings");
 
                     b.Navigation("Tales");

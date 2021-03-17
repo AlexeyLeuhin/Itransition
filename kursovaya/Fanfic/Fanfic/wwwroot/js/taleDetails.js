@@ -4,7 +4,46 @@ var saveButton = document.getElementById("saveButton");
 var leftArrow = document.getElementById("leftArrow");
 var rightArrow = document.getElementById("rightArrow");
 var selectedItem = null;
+var dropFile = document.getElementById("divUploadFile");
 var listItems = document.getElementsByClassName("list-group-item");
+var shoulNotBeSelected = false;
+var likeButton = document.getElementById("likeButton");
+
+$(function () {
+    $("#divUploadFile").filedrop({
+        fallback_id: 'update-profile-button',
+        fallback_dropzoneClick: false,
+        url: '/FileUpload/UploadChapterImage',
+        allowedfiletypes: ['image/jpeg', 'image/png', 'image/gif'],
+        allowedfileextensions: ['.jpg', '.jpeg', '.png', '.gif'],
+        paramname: 'chapterImage',
+        maxfiles: 1,
+        maxfilesize: 5,
+        data: {
+            'chapterId': function () {
+                return selectedItem.id; 
+            },
+        },
+        dragOver: function () {
+            $("#divUploadFile").addClass('');
+        },
+        dragLeave: function () {
+            $("#divUploadFile").addClass('');
+        },
+        drop: function () {
+            $("#imgLoading").show();
+        },
+        uploadFinished: function (i, file, response, time) {
+            $("#imgLoading").hide();
+            document.getElementById("chapterImage-" + selectedItem.id).src = response;
+        },
+        afterAll: function () {
+            $("#divUploadFile").addClass('');
+        }
+    });
+});
+
+
 
 
 $("#rating-id").rating({
@@ -19,11 +58,10 @@ $("#rating-id").rating({
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         success: function (response) {
-            $('#rating-id').rating('refresh', { readonly: true });
-        },
-    });
+            location.reload();
+        }
+    }); 
 });
-
 
 leftArrow.onclick = function (e) {
     if (selectedItem) {
@@ -91,9 +129,6 @@ if (draggableList) {
                     xhr.setRequestHeader("XSRF-TOKEN",
                         $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
-                success: function (response) {
-                    draggableList.appendChild(constructNewChapterListItem(response));
-                },
             });
             checkNavigationElements();
         },
@@ -124,7 +159,7 @@ function checkNavigationElements() {
     }
     
 }
-
+ 
 for (i = 0; i < listItems.length; i += 1) {
 
     listItems[i].onclick = function (e) {
@@ -146,6 +181,9 @@ function addChapter() {
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         success: function (response) {
+            var img = document.createElement('img');
+            img.id = "chapterImage-" + response;
+            document.getElementById("chaptersImages").appendChild(img);
             draggableList.appendChild(constructNewChapterListItem(response));
         },
     });
@@ -153,42 +191,76 @@ function addChapter() {
 
 function deleteChapter(curChapterId) {
     let id = Number(curChapterId);
+    let li = document.getElementById(id);
+    draggableList.removeChild(li);
+    shoulNotBeSelected = true;
+    if (selectedItem && selectedItem.id == curChapterId) {
+        document.getElementById("chapterNameLabel").textContent = "";
+        document.getElementById("chapterText").value = "";
+        document.getElementById("chapterImage-" + id).hidden = true;
+        document.getElementById("likesNumber").hidden = true;
+        if (dropFile != null) {
+            dropFile.hidden = true;
+        }
+        likeButton.removeChild(document.getElementById("likeHeart"));
+        likeButton.hidden = true;
+        selectedItem = null;
+    }
+    checkNavigationElements();
     $.ajax({
         url: "TaleDetails?handler=DeleteChapter",
         data: { "chapterId": id, "taleId": taleId },
-        type: 'Post',
+        type: 'POST',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
-        },
-        success: function (id) {
-            let li = document.getElementById(id);
-            draggableList.removeChild(li);
-            document.getElementById("chapterNameLabel").textContent = "";
-            document.getElementById("chapterText").value = "";
-            selectedItem = null;
-            checkNavigationElements();
-        },
+        }
     });   
 }
 
-function onSelect(listElement){
-    if (selectedItem) {
-        selectedItem.classList.remove("active");
+function onSelect(listElement) {
+    if (shoulNotBeSelected == false) {
+        if (selectedItem) {
+            document.getElementById("chapterImage-" + selectedItem.id).hidden = true;
+            selectedItem.classList.remove("active");
+            likeButton.removeChild(document.getElementById("likeHeart"));
+        }
+        likeButton.hidden = false;
+        selectedItem = listElement;
+        document.getElementById("chapterImage-" + listElement.id).hidden = false;
+        document.getElementById("likesNumber").hidden = false;
+        if (dropFile != null) {
+            dropFile.hidden = false;
+        }
+        listElement.classList.add("active");
+        document.getElementById("chapterNameLabel").textContent = listElement.children[0].value;
+        $.ajax({
+            url: "TaleDetails?handler=ChapterInfo",
+            data: { "chapterId": listElement.id },
+            type: 'GET',
+            complete: function (response) {
+                response = response.responseJSON;
+                document.getElementById("chapterText").value = response.text;
+                document.getElementById("likesNumber").textContent = response.chapterLikes;
+                likeButton.appendChild(createLikeHeartIcon(response.userLikedChapter));
+            },
+        });
+        checkNavigationElements();
+    } else {
+        shoulNotBeSelected = false;
     }
-    listElement.classList.add("active");
-    selectedItem = listElement;
-    document.getElementById("chapterNameLabel").textContent = listElement.children[0].value;
+}
 
-    $.ajax({
-        url: "TaleDetails?handler=ChapterText",
-        data: { "chapterId": selectedItem.id },
-        type: 'GET',
-        complete: function (text) {
-            document.getElementById("chapterText").value = text.responseJSON;
-        },
-    });
-    checkNavigationElements();
+function createLikeHeartIcon(liked) {
+    let ic = document.createElement("i");
+    ic.id = "likeHeart";
+    ic.classList.add("fa");
+    if (liked) {
+        ic.classList.add("fa-heart");
+    } else {
+        ic.classList.add("fa-heart-o");
+    }
+    return ic;
 }
 
 function onChapterRename(element) {
@@ -217,6 +289,23 @@ function saveChapterText() {
         type: 'POST',
         success: function (response) {
             alert(response);
+        },
+    });
+}
+
+function onLikePressed() {
+    $.ajax({
+        url: "TaleDetails?handler=LikePressed",
+        data: { "chapterId": selectedItem.id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        type: 'POST',
+        success: function (response) {
+            likeButton.removeChild(document.getElementById("likeHeart"));
+            likeButton.appendChild(createLikeHeartIcon(response.userLikedChapter));
+            document.getElementById("likesNumber").textContent = response.chapterLikes;
         },
     });
 }

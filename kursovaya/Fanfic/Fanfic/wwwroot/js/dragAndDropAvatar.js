@@ -19,8 +19,6 @@
         },
         afterAll: function () {
             $("#divUploadFile").addClass('');
-        },
-        afterAll: function () {
             $("#imgLoading").hide();
             location.reload();
         }

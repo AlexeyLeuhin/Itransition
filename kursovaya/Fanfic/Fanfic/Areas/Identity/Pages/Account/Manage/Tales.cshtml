@@ -2,7 +2,7 @@
 @using Fanfic.Data
 @model Fanfic.Areas.Identity.Pages.Account.Manage.TalesModel
 @{
-    
+
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -23,7 +23,10 @@
                         <span>x</span>
                     </button>
                 </div>
-                <form method="post" asp-page="Tales" asp-page-handler="CreateTale">
+                <form method="post" asp-page="Tales" asp-page-handler="CreateTale"
+                      asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
+                      asp-route-sortType="@Model.PageInfo.SortType"
+                      asp-route-filterGanre="@Model.PageInfo.FilterGanre">
 
                     <div class="modal-body">
                         <div class="form-group">
@@ -80,3 +83,7 @@
 
     @await Html.PartialAsync("_PaginationNavigation", Model.PageInfo)
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/star-rating/star-rating.min.js"></script>

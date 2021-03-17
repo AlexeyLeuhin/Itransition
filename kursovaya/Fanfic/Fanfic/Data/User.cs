@@ -12,5 +12,6 @@ namespace Fanfic.Data
         public List<Tale> Tales { get; set; } = new List<Tale>();
         public string AvatarPath { get; set; }
         public List<Rating> Ratings { get; set; } = new List<Rating>();
+        public List<Like> Likes { get; set; } = new List<Like>();
     }
 }

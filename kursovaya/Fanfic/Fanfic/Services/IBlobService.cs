@@ -10,6 +10,7 @@ namespace Fanfic.Services
         string ConnectionString { get; }
         BlobServiceClient blobServiceClient { get; }
 
-        public Task<string> UploadAvatar(IFormFile file, string blobName);
+        public Task<string> UploadToBlobContainerAsync(IFormFile file, string blobName, string containerName);
+        public Task DeleteChapterImageFromBlobsIfExists(long chapterId);
     }
 }

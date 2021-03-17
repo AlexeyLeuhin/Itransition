@@ -27,5 +27,7 @@ namespace Fanfic.Data
         public string Text { get; set; }
         public string PictureUrl { get; set; }
         public int SerialNumber { get; set; }
+        public int LikesNumber { get; set; }
+        public List<Like> Likes {get;set;}
     }
 }
