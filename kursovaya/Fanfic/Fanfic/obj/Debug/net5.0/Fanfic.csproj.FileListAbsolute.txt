@@ -401,3 +401,11 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Fanfic.genruntimeconfi
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\Shared\_TalePartial.cshtml.g.cs
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\Shared\_PaginationNavigation.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\SearchResult.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.Mvc.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.Razor.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.Helpers.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.WebPages.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll

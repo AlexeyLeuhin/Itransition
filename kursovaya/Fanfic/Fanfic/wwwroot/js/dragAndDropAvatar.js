@@ -22,6 +22,7 @@
             $("#imgLoading").hide();
             location.reload();
         }
-    });
+    });    
+    
 });
 

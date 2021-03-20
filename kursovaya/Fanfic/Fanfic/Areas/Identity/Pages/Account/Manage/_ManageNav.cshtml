@@ -2,9 +2,18 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="Personal data" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-    <li class="nav-item"><a class="nav-link" id="tales" asp-page="./Tales">Your tales</a></li>
+<ul class="nav flex-column nav-tabs">
+    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage"  asp-page="./Index">Profile</a></li>
+    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage/ChangePassword" asp-page="./ChangePassword">Password</a></li>
+    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage/Tales" asp-page="./Tales">Your tales</a></li>
 </ul>
- 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    var current = location.pathname;
+    $('.nav-tabs li a').each(function () {
+        var $this = $(this);
+        if (current == $this.attr('id')) {
+            $this.addClass('active-nav');
+        }
+    })
+</script>

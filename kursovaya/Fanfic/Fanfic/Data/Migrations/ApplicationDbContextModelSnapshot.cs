@@ -128,17 +128,15 @@ namespace Fanfic.Data.Migrations
 
             modelBuilder.Entity("Fanfic.Data.Tag", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
 
-                    b.ToTable("Tag");
+                    b.HasKey("Name");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Tale", b =>
@@ -391,13 +389,13 @@ namespace Fanfic.Data.Migrations
 
             modelBuilder.Entity("TagTale", b =>
                 {
-                    b.Property<long>("TagsId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("TagsName")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<long>("TalesId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("TagsId", "TalesId");
+                    b.HasKey("TagsName", "TalesId");
 
                     b.HasIndex("TalesId");
 
@@ -518,7 +516,7 @@ namespace Fanfic.Data.Migrations
                 {
                     b.HasOne("Fanfic.Data.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagsId")
+                        .HasForeignKey("TagsName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

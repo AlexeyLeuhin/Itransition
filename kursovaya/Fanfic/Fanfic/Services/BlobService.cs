@@ -1,6 +1,7 @@
 ﻿using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,9 @@ namespace Fanfic.Services
 {
     public class BlobService : IBlobService
     {
-        public BlobService()
-        {
-            //put to keystore
-            ConnectionString = "DefaultEndpointsProtocol=https;AccountName=fanficblobstorage;AccountKey=NgOsjFbR1UZfBtY+3bsnLjZeF3AFjZTrwyC/BvKHy59RwgnqoSzmBNx1Dy3pNTlFRSt2DwJHLqVQZe1SSEvlFg==;EndpointSuffix=core.windows.net";
+        public BlobService(IConfiguration configuration)
+        {    
+            ConnectionString = configuration["Blob-service-connection-string"];
             blobServiceClient = new BlobServiceClient(ConnectionString);
         }
 

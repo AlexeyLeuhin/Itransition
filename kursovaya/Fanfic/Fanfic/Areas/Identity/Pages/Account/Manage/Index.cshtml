@@ -30,7 +30,7 @@
             </div>
 
             <div id="divUploadFile" style="width:200px; height:100px; line-height:400px; border:1px solid; text-align:center;">
-                Drop file here
+                <p>Drop file here</p>
             </div>
             <img id="imgLoading" src="~/gifs/loading.gif" style="display:none; width:100px; height:100px;" />
 
@@ -48,6 +48,11 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="~/lib/jquery.filedrop.js"></script>
     <script src="~/js/dragAndDropAvatar.js"></script>
 }

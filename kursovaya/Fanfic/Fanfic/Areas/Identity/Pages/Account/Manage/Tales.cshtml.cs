@@ -59,6 +59,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             [Required(ErrorMessage = "Enter Short Description pls")]
             [StringLength(300, MinimumLength = 10, ErrorMessage = "String length must be between 10 and 300 symbols")]
             public string ShortDescription { get; set; }
+            public string Tags { get; set; }
         }
 
         public class PaginationModel
@@ -104,7 +105,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
         public async Task LoadAsync(TaleGanre? sortGanre, SortState sortType, int page)
         {
             var user = await _userManager.GetUserAsync(User);
-            IQueryable<Tale> tales = _dbContext.Tales.Where<Tale>(tale => tale.User == user);
+            IQueryable<Tale> tales = _dbContext.Tales.Where<Tale>(tale => tale.User == user).Include(c => c.Tags);
             tales = _taleFiltrator.FilterByGanre(tales, sortGanre);
             tales = _taleSorter.Sort(tales, sortType);
             await Paginate(tales, page, await tales.CountAsync());
@@ -129,7 +130,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             return Redirect(url);
         }
 
-        public async Task<IActionResult> OnPostCreateTale(int pageNumber, SortState sortType, TaleGanre? filterGanre)
+        public async Task<IActionResult> OnPostCreateTale()
         {
             if (!ModelState.IsValid)
             {
@@ -137,9 +138,24 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
                 return null;
             }
             Tale tale = new Tale(_userManager.GetUserAsync(User).Result, Input.Name, Input.ShortDescription, Input.Ganre, DateTime.Now);
+            foreach (string tag in Input.Tags.Split(" ").ToList())
+            {
+                Tag newTag = await _dbContext.Tags.FindAsync(tag);
+                if (newTag == null)
+                {
+                    newTag = new Tag(tag);
+                    await _dbContext.Tags.AddAsync(newTag);
+                }
+                else
+                {
+                    newTag.Weight += 1;
+                    _dbContext.Update(newTag);
+                }
+                tale.Tags.Add(newTag);
+            }
             await _dbContext.AddAsync(tale);
             _dbContext.SaveChanges();     
-            return RedirectToPage("Tales", new { pageNumber, sortType, filterGanre });
+            return RedirectToPage("Tales");
         }
 
         public async Task<IActionResult> OnPostDeleteTale(long Id, int pageNumber, SortState sortType, TaleGanre? filterGanre)
@@ -148,5 +164,16 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             await _dbContext.SaveChangesAsync();
             return RedirectToPage("Tales", new { pageNumber, sortType, filterGanre });
         }
+
+        public IActionResult OnGetAutocompleteSearch(string term)
+        {
+            List<Tag> tags = _dbContext.Tags.ToList();
+            var models = tags.Where(a => a.Name.Contains(term))
+                            .Select(a => a.Name )
+                            .ToList();
+
+            return new JsonResult(models);
+        }
     }
+
 }

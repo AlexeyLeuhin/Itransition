@@ -26,6 +26,15 @@
       "files": [
         "dist/browser/signalr.min.js"
       ]
+    },
+    {
+      "library": "jqueryui@1.11.1",
+      "destination": "wwwroot/css/jqueryui/",
+      "files": [
+        "jquery-ui.min.js",
+        "jquery-ui.css",
+        "jquery-ui.theme.min.css"
+      ]
     }
   ]
 }

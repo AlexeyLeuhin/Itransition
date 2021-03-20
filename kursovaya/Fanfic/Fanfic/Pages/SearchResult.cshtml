@@ -1,0 +1,19 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Fanfic.Pages.SearchResultModel
+@{
+    Layout = "../Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @foreach (var tale in Model.Tales)
+    {
+        <div class="current-tale">
+            @await Html.PartialAsync("_TalePartial", tale)
+        </div>
+    }
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="~/lib/star-rating/star-rating.min.js"></script>
+<script src="~/js/searchResult.js"></script>

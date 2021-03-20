@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Fanfic</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,900&display=swap" rel="stylesheet">
     <link href="~/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -16,39 +18,32 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <a class="navbar-brand" asp-page="/Index">Fanfic</a>
-            <div class="container">
-                <div class="row">
-                    <div id="custom-search-input">
-                        <div class="input-group">
-                            <input type="text" class="  search-query form-control" placeholder="Search" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" type="button">
-                                    <span class=" fa fa-search"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <partial name="_LoginPartial" />
-
+        <nav class="navbar head navbar-expand-lg">
+            <a class="navbar-brand" style="color:white;" asp-page="/Index">Fanfic</a>
+            
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto"></ul>
+                <form class="form-inline">
+                    <input class="search" placeholder="Search">
+                    <button class="transparent-button" type="submit"><i class="fa fa-search" style="color:white;" aria-hidden="true"></i></button>
+                </form>
+                <ul class="navbar-nav mr-auto"></ul>
             </div>
-        </nav>
+            <partial name="_LoginPartial">
+</nav>
+        
+           
+        
+        
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery.filedrop.js"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -3,6 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "../Views/Shared/_Layout.cshtml";
+    Html.AntiForgeryToken();
 }
 
 <div class="container">
@@ -13,14 +14,34 @@
             <div style="background-color:lavender; margin: 30px;">
                 <a href='/TaleDetails?taleId=@tale.Id'>@tale.Name</a>
                 <p>@tale.CreationTime</p>
-                <input id="input-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                <input id="input-date-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
                 <p>@tale.NumberOfRatings votes</p>
             </div>
         }
     </div>
 
+    <h2>Top Rating tales</h2>
+    <div class="row col-12">
+        @foreach (var tale in Model.RatingSortedTales)
+        {
+            <div style="background-color:lavender; margin: 30px;">
+                <a href='/TaleDetails?taleId=@tale.Id'>@tale.Name</a>
+                <p>@tale.CreationTime</p>
+                <input id="input-rating-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                <p>@tale.NumberOfRatings votes</p>
+            </div>
+        }
+    </div>
+
+    <div id="wordCloud"></div>
+
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="~/lib/star-rating/star-rating.min.js"></script>
+
+<script src="~/lib/tag-cloud/jQWCloudv3.4.1.js"></script>
 <script src="~/js/index.js"></script>

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Azure.Storage.Blobs;
 using Fanfic.Controllers;
 using Fanfic.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace Fanfic.Areas.Identity.Pages.Account.Manage
 {
@@ -23,6 +24,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
         private readonly ApplicationDbContext _dbContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IBlobService _blobService;
+        private readonly IConfiguration _configuration;
 
 
         public IndexModel(
@@ -30,13 +32,15 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             SignInManager<User> signInManager,
             ApplicationDbContext dbContext,
             IWebHostEnvironment webHostEnvironment,
-            IBlobService blobService)
+            IBlobService blobService,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _dbContext = dbContext;
             _webHostEnvironment = webHostEnvironment;
             _blobService = blobService;
+            _configuration = configuration;
         }
 
         public string Username { get; set; }
@@ -74,7 +78,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             var avatarPath = user.AvatarPath;
             if(avatarPath == null)
             {
-                avatarPath = "~/avatars/user.png";          //put to key value
+                avatarPath = _configuration["Default-avatar-path"]; 
             }
 
             Username = userName;
@@ -128,7 +132,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
              
             if(Input.Name != user.Name)
             {       
-                user.Name = Input.Name;  
+                user.Name = Input.Name;
             }
 
             if (Input.Age != user.Age)

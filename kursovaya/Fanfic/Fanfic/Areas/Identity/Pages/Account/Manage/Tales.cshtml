@@ -23,26 +23,33 @@
                         <span>x</span>
                     </button>
                 </div>
-                <form method="post" asp-page="Tales" asp-page-handler="CreateTale"
-                      asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
-                      asp-route-sortType="@Model.PageInfo.SortType"
-                      asp-route-filterGanre="@Model.PageInfo.FilterGanre">
+                <form method="post" asp-page="Tales" asp-page-handler="CreateTale">
 
                     <div class="modal-body">
                         <div class="form-group">
                             <label asp-for="Input.Name"></label>
-                            <input asp-for="Input.Name" class="form-control" />
+                            <input asp-for="Input.Name" id="inputName" class="form-control" />
                             <span asp-validation-for="Input.Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Input.Ganre"></label>
-                            <select asp-for="Input.Ganre" class="form-control" asp-items="@Html.GetEnumSelectList<Tale.TaleGanre>()">
+                            <select asp-for="Input.Ganre" id="inputGanre" class="form-control" asp-items="@Html.GetEnumSelectList<Tale.TaleGanre>()">
                             </select>
                         </div>
                         <div class="form-group">
                             <label asp-for="Input.ShortDescription"></label>
-                            <textarea class="form-control" asp-for="Input.ShortDescription"></textarea>
+                            <textarea asp-for="Input.ShortDescription" class="form-control" id="inputShortDescription"></textarea>
                             <span asp-validation-for="Input.ShortDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tags</label>
+                            <div id="autocompleteDiv" class="row">
+                                <input type="text" id="inputTag" class="form-control" />
+                                <button type="button" class="transparent-button" onclick="addTag();"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <ul id="addedTags" class="tags-list"></ul>
+                                <input asp-for="Input.Tags" hidden="hidden" id="hiddenTags">
+                            </div>
                         </div>
                     </div>
 
@@ -51,7 +58,10 @@
                         <input type="submit" class="btn btn-success" value="Add">
                     </div>
                 </form>
+                
+                
             </div>
+           
         </div>
     </div>
     <!-- -->
@@ -63,7 +73,20 @@
             }
             else
             {
-                @await Html.PartialAsync("_TalePartial", Model)
+                
+                @foreach (var tale in Model.Tales)
+                {
+                    <div class="current-tale">
+                        @await Html.PartialAsync("_TalePartial", tale)
+                        <form asp-page-handler="DeleteTale" asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
+                              asp-route-Id="@tale.Id"
+                              asp-route-sortType="@Model.PageInfo.SortType"
+                              asp-route-filterGanre="@Model.PageInfo.FilterGanre" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                }
+
             }
         </div>
         <div class="col-4">
@@ -87,3 +110,16 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/lib/star-rating/star-rating.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+        $('#inputTag').autocomplete({
+            source: '@Url.Page("Tales", "AutocompleteSearch")',
+            appendTo: "#autocompleteDiv",
+            minLength: 2
+        });
+    });
+</script>
+<script src="~/js/accountTales.js"></script>
