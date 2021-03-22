@@ -18,6 +18,8 @@ namespace Fanfic.Data
             this.CreateTime = createTime;
             this.Author = author;
         }
+
+        public Tale Tale { get; set; }
         public long CommentId { get; set; }
         public string Message { get; set; }
         public DateTime CreateTime { get; set; }

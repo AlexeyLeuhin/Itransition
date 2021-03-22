@@ -417,11 +417,13 @@ namespace Fanfic.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Fanfic.Data.Tale", null)
+                    b.HasOne("Fanfic.Data.Tale", "Tale")
                         .WithMany("Comments")
                         .HasForeignKey("TaleId");
 
                     b.Navigation("Author");
+
+                    b.Navigation("Tale");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Like", b =>

@@ -182,27 +182,31 @@ namespace Fanfic.Areas.TaleDetails
 
         public async Task<IActionResult> OnPostLikePressed(long chapterId)
         {
-                User user = await _userManager.GetUserAsync(User);
-                Chapter chapter = _dbContext.Chapters.Include(c => c.Likes).FirstOrDefault(c => c.Id == chapterId);
-                bool userLikedChapter;
-                var like = chapter.Likes.FirstOrDefault(l => l.UserId == user.Id);
-                if (like != null)
-                {
-                    userLikedChapter = false;
-                    _dbContext.Remove(like);
-                    chapter.LikesNumber -= 1;
-                }
-                else
-                {
-                    userLikedChapter = true;
-                    like = new Like(user.Id, chapter);
-                    chapter.LikesNumber += 1;
-                    _dbContext.Add(like);
-                }
-                _dbContext.Update(chapter);
+            User user = await _userManager.GetUserAsync(User);
+            Chapter chapter = _dbContext.Chapters.AsNoTracking().Include(c => c.Likes).FirstOrDefault(c => c.Id == chapterId);
+            bool userLikedChapter;
+            var like = chapter.Likes.FirstOrDefault(l => l.UserId == user.Id);
+            if (like != null)
+            {
+                userLikedChapter = false;
+                _dbContext.Remove(like);
+                chapter.LikesNumber -= 1;
+            }
+            else
+            {
+                userLikedChapter = true;
+                like = new Like();
+                like.UserId = user.Id;
+                await _dbContext.Likes.AddAsync(like);
                 await _dbContext.SaveChangesAsync();
-                int chapterLikes = chapter.LikesNumber;
-                return new JsonResult(new { chapterLikes, userLikedChapter });
-        }
+                chapter.LikesNumber += 1;
+                like.Chapter = chapter;
+                _dbContext.Update(like);
+            }
+            _dbContext.Update(chapter);
+            await _dbContext.SaveChangesAsync();
+            int chapterLikes = chapter.LikesNumber;
+            return new JsonResult(new { chapterLikes, userLikedChapter });
+         }
     }
 }

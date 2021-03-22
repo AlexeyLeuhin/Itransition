@@ -25,6 +25,7 @@ namespace Fanfic.SignalR
             Tale tale = _dbContext.Tales.Find(taleId);
             User user = await _userManager.FindByIdAsync(userId);
             Comment comment = new Comment(commentText, DateTime.Now, user);
+            comment.Tale = tale;
             _dbContext.Add(comment);
             tale.Comments.Add(comment);
             _dbContext.Update(tale);

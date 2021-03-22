@@ -409,3 +409,13 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.WebPages.De
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\System.Web.WebPages.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Azure.SignalR.Common.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Azure.SignalR.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Azure.SignalR.Protocols.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\J2N.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.Analysis.Common.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.Queries.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.QueryParser.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.Sandbox.dll

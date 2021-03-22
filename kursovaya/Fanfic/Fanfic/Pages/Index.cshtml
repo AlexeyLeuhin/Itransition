@@ -7,32 +7,67 @@
 }
 
 <div class="container">
-    <h2>Latest created tales</h2>
-    <div class="row col-12">
-        @foreach (var tale in Model.DateSortedTales)
-        {
-            <div style="background-color:lavender; margin: 30px;">
-                <a href='/TaleDetails?taleId=@tale.Id'>@tale.Name</a>
-                <p>@tale.CreationTime</p>
-                <input id="input-date-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
-                <p>@tale.NumberOfRatings votes</p>
-            </div>
-        }
-    </div>
-
-    <h2>Top Rating tales</h2>
-    <div class="row col-12">
+    <h2 style="margin-bottom: 40px;">Latest created tales</h2>
+    <div class="card-columns">
         @foreach (var tale in Model.RatingSortedTales)
         {
-            <div style="background-color:lavender; margin: 30px;">
-                <a href='/TaleDetails?taleId=@tale.Id'>@tale.Name</a>
-                <p>@tale.CreationTime</p>
-                <input id="input-rating-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
-                <p>@tale.NumberOfRatings votes</p>
+            <div class="card text-white bg-dark current-tale" style="width: 18rem;">
+                <div class="card-body">
+                    <h3 class="card-title text-center text-capitalize">@tale.Name</h3>
+                    <h5 class="text-left" style="text-decoration: underline;">@tale.Ganre.ToString()</h5>
+                    <p class="card-text">@tale.ShortDiscription</p>
+                    <a href="/TaleDetails?taleId=@tale.Id" class="btn btn-primary">Read</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="text-left">
+                        <div class="row" style="margin-left: 0px;">
+                            <input id="input-date-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                            <span style="margin-left:10px;">@tale.NumberOfRatings votes</span>
+                        </div>
+                        @tale.CreationTime.ToShortDateString()
+                    </div>
+                    <p>
+                        @foreach (var tag in tale.Tags)
+                        {
+                            <a href="/SearchResult?handler=SearchByTag&tagName=@tag.Name" class="card-link">#@tag.Name</a>
+                        }
+                    </p>
+                </div>
             </div>
         }
+
     </div>
 
+    <h2 style="margin-top:80px; margin-bottom:40px;">Top Rating tales</h2>
+    <div class="card-columns">
+        @foreach (var tale in Model.RatingSortedTales)
+        {
+            <div class="card text-white bg-dark current-tale" style="width: 18rem;">
+                <div class="card-body">
+                    <h3 class="card-title text-center text-capitalize">@tale.Name</h3>
+                    <h5 class="text-left" style="text-decoration: underline;">@tale.Ganre.ToString()</h5>
+                    <p class="card-text">@tale.ShortDiscription</p>
+                    <a href="/TaleDetails?taleId=@tale.Id" class="btn btn-primary">Read</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="text-left">
+                        <div class="row" style="margin-left: 0px;">
+                            <input id="input-rating-@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                            <span style="margin-left:10px;">@tale.NumberOfRatings votes</span>
+                        </div>
+                        @tale.CreationTime.ToShortDateString()
+                    </div>
+                    <p>
+                        @foreach (var tag in tale.Tags)
+                        {
+                            <a href="/SearchResult?handler=SearchByTag&tagName=@tag.Name" class="card-link">#@tag.Name</a>
+                        }
+                    </p>
+                    </div>
+            </div>
+        }
+
+    </div>
     <div id="wordCloud"></div>
 
 </div>

@@ -49,11 +49,27 @@ body {
   margin-bottom: 60px;
 }
 
+.current-tale p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    line-height: 19px; /* fallback */
+    max-height: 76px; /* fallback */
+}
 
-.current-tale{
-    border: solid, 4px;
-    background-color: skyblue;
-    margin: 15px;
+a {
+    color: dodgerblue;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+a:focus {
+    outline: 0;
 }
 
 #divUploadFile {
@@ -90,15 +106,19 @@ input[readonly] {
 }
 
 .pagination-number-current{
-    background-color: black;
-    border: solid;
-    border-color: black;
+    margin: 5px;
+    color:red;
+    text-decoration: underline;
 }
 
+
+
 .pagination-number {
-    border: solid;
-    border-color: blue;
+    color: #303030;
+    margin: 5px;
 }
+
+
 
 .tags-list li {
     display: inline; 
@@ -139,4 +159,30 @@ h2 {
     background-color: #303030;
     color: white;
 }
+
+.create-tale-button {
+    color:white;
+    background-color: #303030;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    color: white;
+}
+
 

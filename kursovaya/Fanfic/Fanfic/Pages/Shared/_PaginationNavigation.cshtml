@@ -1,14 +1,14 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model Fanfic.Areas.Identity.Pages.Account.Manage.TalesModel.PageStatus
 
-<div class="row">
+<div class="d-inline-block">
     @if (Model.Pagination.HasPreviousPage)
     {
         <a asp-page="Tales"
            asp-route-sortType="@(Model.SortType)"
            asp-route-filterGanre="@(Model.FilterGanre)"
-           asp-route-pageNumber=@(Model.Pagination.PageNumber - 1)>
-            Previous
+           asp-route-pageNumber=@(Model.Pagination.PageNumber - 1) class="d-inline-block">
+            <i class="fa fa-caret-left" aria-hidden="true"></i>
         </a>
     }
 
@@ -16,7 +16,7 @@
     {
         @if (i == Model.Pagination.PageNumber)
         {
-            <div class="pagination-number-current">
+            <div class="pagination-number-current d-inline-block">
                 <a asp-page="Tales"
                    asp-route-sortType="@(Model.SortType)"
                    asp-route-filterGanre="@(Model.FilterGanre)"
@@ -27,7 +27,7 @@
         }
         else
         {
-            <div class="pagination-number">
+            <div class="pagination-number d-inline-block">
                 <a asp-page="Tales"
                    asp-route-sortType="@(Model.SortType)"
                    asp-route-filterGanre="@(Model.FilterGanre)"
@@ -43,8 +43,8 @@
         <a asp-page="Tales"
            asp-route-sortType="@(Model.SortType)"
            asp-route-filterGanre="@(Model.FilterGanre)"
-           asp-route-pageNumber=@(Model.Pagination.PageNumber + 1)>
-            Next
+           asp-route-pageNumber=@(Model.Pagination.PageNumber + 1)  class="d-inline-block">
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
         </a>
     }
 </div>

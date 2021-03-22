@@ -20,7 +20,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
 
     public class TalesModel : PageModel
     {
-        private const int pageSize = 5;
+        private const int pageSize = 3;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<User> _userManager;
         private readonly ITaleSortService _taleSorter;
@@ -138,21 +138,26 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
                 return null;
             }
             Tale tale = new Tale(_userManager.GetUserAsync(User).Result, Input.Name, Input.ShortDescription, Input.Ganre, DateTime.Now);
-            foreach (string tag in Input.Tags.Split(" ").ToList())
+            if (Input.Tags != null)
             {
-                Tag newTag = await _dbContext.Tags.FindAsync(tag);
-                if (newTag == null)
+                foreach (string tag in Input.Tags.Split(" ").ToList())
                 {
-                    newTag = new Tag(tag);
-                    await _dbContext.Tags.AddAsync(newTag);
+                    Tag newTag = await _dbContext.Tags.FindAsync(tag);
+                    if (newTag == null)
+                    {
+                        newTag = new Tag(tag);
+                        await _dbContext.Tags.AddAsync(newTag);
+                    }
+                    else
+                    {
+                        newTag.Weight += 1;
+                        _dbContext.Update(newTag);
+                    }
+                    tale.Tags.Add(newTag);
                 }
-                else
-                {
-                    newTag.Weight += 1;
-                    _dbContext.Update(newTag);
-                }
-                tale.Tags.Add(newTag);
             }
+           
+           
             await _dbContext.AddAsync(tale);
             _dbContext.SaveChanges();     
             return RedirectToPage("Tales");

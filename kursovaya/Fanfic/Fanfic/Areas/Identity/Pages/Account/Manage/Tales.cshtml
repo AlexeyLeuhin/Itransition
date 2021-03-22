@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div id="tales">
-    <a href="#createTale" class="btn btn-success" data-toggle="modal"><span>Add New Tale</span></a>
-
     <!-- Create Tale Modal -->
     <div class="modal fade" id="createTale">
         <div class="modal-dialog">
@@ -58,10 +56,10 @@
                         <input type="submit" class="btn btn-success" value="Add">
                     </div>
                 </form>
-                
-                
+
+
             </div>
-           
+
         </div>
     </div>
     <!-- -->
@@ -73,32 +71,48 @@
             }
             else
             {
-                
+
                 @foreach (var tale in Model.Tales)
                 {
-                    <div class="current-tale">
-                        @await Html.PartialAsync("_TalePartial", tale)
-                        <form asp-page-handler="DeleteTale" asp-route-pageNumber="@Model.PageInfo.Pagination.PageNumber"
-                              asp-route-Id="@tale.Id"
-                              asp-route-sortType="@Model.PageInfo.SortType"
-                              asp-route-filterGanre="@Model.PageInfo.FilterGanre" method="post">
-                            <button type="submit">Delete</button>
-                        </form>
+                    <div class="card text-white bg-dark current-tale" style="width: 24rem; margin: 20px;">
+                        <div class="card-body">
+                            <h3 class="card-title text-center text-capitalize">@tale.Name</h3>
+                            <h5 class="text-left" style="text-decoration: underline;">@tale.Ganre.ToString()</h5>
+                            <p class="card-text">@tale.ShortDiscription</p>
+                            <a href="/TaleDetails?taleId=@tale.Id" class="btn btn-primary">Read</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div class="text-left">
+                                <div class="row" style="margin-left: 0px;">
+                                    <input id="@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                                    <span style="margin-left:10px;">@tale.NumberOfRatings votes</span>
+                                </div>
+                                @tale.CreationTime.ToShortDateString()
+                            </div>
+                            <p>
+                                @foreach (var tag in tale.Tags)
+                                {
+                                    <a href="/SearchResult?handler=SearchByTag&tagName=@tag.Name" class="card-link">#@tag.Name</a>
+                                }
+                            </p>
+                        </div>
                     </div>
                 }
 
             }
         </div>
         <div class="col-4">
+            <a href="#createTale" data-toggle="modal" class="btn create-tale-button">Create new</a>
+
             <form method="get">
-                <label>Filter by ganre:</label>
+                <h4>Filter by ganre:</h4>
                 <select name="filterGanre" asp-items="@Html.GetEnumSelectList<Tale.TaleGanre>()" class="form-control">
                     <option value="">All</option>
                 </select>
-                <label>Sort by:</label>
+                <h4>Sort by:</h4>
                 <select name="sortType" asp-items="@Html.GetEnumSelectList<Fanfic.Services.Sorter.SortState>()" class="form-control">
                 </select>
-                <input type="submit" value="Filter" class="btn btn-outline-dark" />
+                <input type="submit" value="Filter" class="btn create-tale-button" />
             </form>
         </div>
 

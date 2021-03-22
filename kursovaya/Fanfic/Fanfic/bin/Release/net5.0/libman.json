@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "@types/sortablejs@1.3.32",
+      "destination": "wwwroot/js/types/sortablejs/"
+    },
+    {
+      "library": "sortablejs@1.13.0",
+      "destination": "wwwroot/js/sortablejs/",
+      "files": [
+        "LICENSE",
+        "package.json",
+        "README.md",
+        "Sortable.js",
+        "Sortable.min.js",
+        "modular/sortable.complete.esm.js",
+        "modular/sortable.core.esm.js",
+        "modular/sortable.esm.js"
+      ]
+    },
+    {
+      "library": "@microsoft/signalr@6.0.0-preview.1.21103.6",
+      "destination": "wwwroot/js/microsoft/signalr/",
+      "files": [
+        "dist/browser/signalr.min.js"
+      ]
+    },
+    {
+      "library": "jqueryui@1.11.1",
+      "destination": "wwwroot/css/jqueryui/",
+      "files": [
+        "jquery-ui.min.js",
+        "jquery-ui.css",
+        "jquery-ui.theme.min.css"
+      ]
+    }
+  ]
+}

@@ -4,17 +4,20 @@
 
 
 
-<a href='/TaleDetails?taleId=@Model.Id'>@Model.Name</a>
-<p>@Model.Id</p>
-<p>@Model.Name</p>
-<p>@Model.ShortDiscription</p>
-<p>@Model.CreationTime.Date</p>
-<input type="text" class="rating" value="@Model.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false" readonly="readonly">
-<p>@Model.NumberOfRatings votes</p>
-<p>tags: </p>
-<ul class="tags-list">
-    @foreach (var tag in Model.Tags)
-    {
-        <li>@tag.Name</li>
-    }
-</ul>
+<p><a href='/TaleDetails?taleId=@Model.Id'>@Model.Name</a></p>
+<label>@Model.ShortDiscription</label>
+<div style="align-content:center;">
+    <label style="float:left;">@Model.CreationTime.Date.ToShortDateString()</label>
+    <div class="row" style="float:right;">
+        <input type="text" class="rating" value="@Model.AverageRating)" data-size="xs" data-show-clear="false" data-show-caption="false" readonly="readonly">
+        <label>@Model.NumberOfRatings</label>
+    </div>
+    <p>tags: </p>
+    <ul class="tags-list">
+        @foreach (var tag in Model.Tags)
+        {
+            <li>@tag.Name</li>
+        }
+    </ul>
+</div>
+

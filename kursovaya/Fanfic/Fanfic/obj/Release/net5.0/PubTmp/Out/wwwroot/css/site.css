@@ -1,16 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
 
 .btn-primary {
   color: #fff;
@@ -18,11 +9,6 @@ a {
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -62,10 +48,95 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+
+.current-tale{
+    border: solid, 4px;
+    background-color: skyblue;
+    margin: 15px;
 }
+
+#divUploadFile {
+    background-color: skyblue;
+}
+
+.tale-details-container {
+    border-radius: 7px;
+    background-color: #F0F0F0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    
+}
+
+input[readonly] {
+    cursor: default;
+    border: none;
+}
+
+.transparent-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+#chapterText{
+    width: 100%;
+    height: 100%;
+}
+
+.pagination-number-current{
+    background-color: black;
+    border: solid;
+    border-color: black;
+}
+
+.pagination-number {
+    border: solid;
+    border-color: blue;
+}
+
+.tags-list li {
+    display: inline; 
+    margin-right: 3px;
+    border: 3px solid #000;
+    padding: 3px;
+}
+
+
+.tagWords{
+    
+}
+
+
+.search {
+    border-radius: 5px;
+    padding: 4px;
+    border: none;
+    outline: none;
+}
+.head {
+    background-color: #303030;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    margin-bottom: 60px;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+.manage-nav {
+    color: #303030;
+}
+.active-nav {
+    background-color: #303030;
+    color: white;
+}
+

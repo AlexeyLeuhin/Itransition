@@ -1,4 +1,12 @@
-﻿function addTag() {
+﻿var ratingPanels = document.getElementsByClassName("rating");
+for (var i = 0; i < ratingPanels.length; i++) {
+    ratingPanels[i].value = parseFloat(ratingPanels[i].value.replace(",", "."));
+    $("#" + ratingPanels[i].id).rating({
+        readonly: true,
+    });
+}
+
+function addTag() {
     let tagText = document.getElementById("inputTag").value;
     let tagsStorage = document.getElementById("hiddenTags");
     if (tagsStorage.value == "") {
