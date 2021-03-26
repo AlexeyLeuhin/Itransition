@@ -1,6 +1,8 @@
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Fanfic.exe
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\avatars\user.png
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\chapterPlaceholder.png
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\css\jqueryui\jquery-ui.css
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\css\jqueryui\jquery-ui.min.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\css\jqueryui\jquery-ui.theme.min.css
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\css\search.css
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\css\site.css
@@ -47,6 +49,7 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\l
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\bootstrap\LICENSE
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\compressorjs\dist\compressor.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery-ui.min.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
@@ -61,6 +64,7 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\l
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery\dist\jquery.min.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery\dist\jquery.min.map
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery\LICENSE.txt
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\markdownify\marked.js
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\Sortable-master\.editorconfig
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\Sortable-master\.gitignore
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\Sortable-master\.jshintrc
@@ -165,6 +169,12 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Azure.Sto
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\DotNetEd.CoreAdmin.Views.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\DotNetEd.CoreAdmin.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Humanizer.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\J2N.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.Analysis.Common.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.Queries.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.QueryParser.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.Sandbox.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Web.Mvc.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Web.Razor.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Web.Helpers.dll
@@ -231,6 +241,7 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Microsoft
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Microsoft.Web.Infrastructure.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Mvc.Grid.Core.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\SixLabors.ImageSharp.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Composition.AttributedModel.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Composition.Convention.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Composition.Hosting.dll

@@ -156,8 +156,6 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
                     tale.Tags.Add(newTag);
                 }
             }
-           
-           
             await _dbContext.AddAsync(tale);
             _dbContext.SaveChanges();     
             return RedirectToPage("Tales");

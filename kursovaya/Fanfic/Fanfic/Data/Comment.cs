@@ -20,9 +20,11 @@ namespace Fanfic.Data
         }
 
         public Tale Tale { get; set; }
+        public long TaleId { get; set; }
         public long CommentId { get; set; }
         public string Message { get; set; }
         public DateTime CreateTime { get; set; }
         public User Author { get; set; }
+        public string UserId { get; set; }
     }
 }

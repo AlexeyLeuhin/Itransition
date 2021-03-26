@@ -21,6 +21,17 @@ hubConnectionComments.on("PostComment", function (comment) {
 hubConnectionComments.start();
 
 
+function Editor(input, preview) {
+    this.update = function () {
+        preview.innerHTML = marked(input.value);
+    };
+    input.editor = this;
+    this.update();
+}
+if (document.getElementById("chapterText") != null) {
+    new Editor(document.getElementById("chapterText"), document.getElementById("previewText"));
+}
+
 $(function () {
     $("#divUploadFile").filedrop({
         fallback_id: 'update-profile-button',
@@ -31,19 +42,39 @@ $(function () {
         paramname: 'chapterImage',
         maxfiles: 1,
         maxfilesize: 5,
-        data: {
-            'chapterId': function () {
-                return selectedItem.id; 
-            },
-        },
         dragOver: function () {
-            $("#divUploadFile").addClass('');
+            $("#divUploadFile").addClass('drop-place-active');
         },
         dragLeave: function () {
-            $("#divUploadFile").addClass('');
+            $("#divUploadFile").removeClass('drop-place-active');
         },
         drop: function () {
             $("#imgLoading").show();
+        },
+        beforeEach: function (file) {
+            new Compressor(file, {
+                quality: 0.6,
+                width: 600,
+                height: 600,
+                success(result) {
+                    const formData = new FormData();
+                    formData.append('chapterImage', result, result.name);
+                    formData.append("chapterId", selectedItem.id);
+                    $.ajax({
+                        url: "/FileUpload/UploadChapterImage",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        type: 'Post',
+                        success: function (response) {
+                            $("#divUploadFile").removeClass('drop-place-active');
+                            $("#imgLoading").hide();
+                            location.reload();
+                        }
+                    });
+                }
+            })
+            return false;
         },
         uploadFinished: function (i, file, response, time) {
             $("#imgLoading").hide();
@@ -106,12 +137,9 @@ function constructNewChapterListItem(newChapterId) {
     let input = document.createElement('input');
     input.type = "text";
     input.value = "New chapter";
-    input.onkeyup = function (e) {
-        onChapterRename(this);
-    };
     input.readOnly = true;
     input.ondblclick = function() { this.readOnly = false; };
-    input.onblur = function () { this.readOnly = true; };
+    input.onblur = listItemOnBlur(this);
     li.appendChild(input);
     li.classList.add("list-group-item");
     let btn = document.createElement('button');
@@ -178,9 +206,6 @@ for (i = 0; i < listItems.length; i += 1) {
         checkNavigationElements();
         onSelect(this);
     };
-    listItems[i].children[0].onkeyup = function (e) {
-        onChapterRename(this);
-    };
 }
 
 function addChapter() {
@@ -195,6 +220,12 @@ function addChapter() {
         success: function (response) {
             var img = document.createElement('img');
             img.id = "chapterImage-" + response;
+            img.src = "/chapterPlaceholder.png";
+            img.classList.add("rounded-circle");
+            img.classList.add("chapter-image");
+            img.width = 200;
+            img.height = 200;
+            img.hidden = true;
             document.getElementById("chaptersImages").appendChild(img);
             draggableList.appendChild(constructNewChapterListItem(response));
         },
@@ -235,9 +266,13 @@ function onSelect(listElement) {
         if (selectedItem) {
             document.getElementById("chapterImage-" + selectedItem.id).hidden = true;
             selectedItem.classList.remove("active");
-            likeButton.removeChild(document.getElementById("likeHeart"));
+            if (document.getElementById("likeHeart")) {
+                likeButton.removeChild(document.getElementById("likeHeart"));
+            }
+           
         }
         likeButton.hidden = false;
+        document.getElementById("rightColumn").hidden = false;
         selectedItem = listElement;
         document.getElementById("chapterImage-" + listElement.id).hidden = false;
         document.getElementById("likesNumber").hidden = false;
@@ -252,7 +287,10 @@ function onSelect(listElement) {
             type: 'GET',
             complete: function (response) {
                 response = response.responseJSON;
-                document.getElementById("chapterText").value = response.text;
+                if (document.getElementById("chapterText")) {
+                    document.getElementById("chapterText").value = response.text;
+                }
+                document.getElementById("previewText").innerHTML = marked(response.text);
                 document.getElementById("likesNumber").textContent = response.chapterLikes;
                 likeButton.appendChild(createLikeHeartIcon(response.userLikedChapter));
             },
@@ -263,17 +301,7 @@ function onSelect(listElement) {
     }
 }
 
-function createLikeHeartIcon(liked) {
-    let ic = document.createElement("i");
-    ic.id = "likeHeart";
-    ic.classList.add("fa");
-    if (liked) {
-        ic.classList.add("fa-heart");
-    } else {
-        ic.classList.add("fa-heart-o");
-    }
-    return ic;
-}
+
 
 function onChapterRename(element) {
     let newName = element.value;
@@ -305,7 +333,28 @@ function saveChapterText() {
     });
 }
 
+function createLikeHeartIcon(liked) {
+    let ic = document.createElement("i");
+    ic.id = "likeHeart";
+    ic.classList.add("fa");
+    if (liked) {
+        ic.classList.add("fa-heart");
+    } else {
+        ic.classList.add("fa-heart-o");
+    }
+    return ic;
+}
+
 function onLikePressed() {
+    let liked = false;
+    if (likeButton.children[0].classList[1] == "fa-heart-o") {
+        liked = true;
+        document.getElementById("likesNumber").textContent = Number(document.getElementById("likesNumber").textContent) + 1;
+    } else {
+        document.getElementById("likesNumber").textContent = Number(document.getElementById("likesNumber").textContent) - 1;
+    }
+    likeButton.removeChild(document.getElementById("likeHeart"));
+    likeButton.appendChild(createLikeHeartIcon(liked));
     $.ajax({
         url: "TaleDetails?handler=LikePressed",
         data: { "chapterId": selectedItem.id},
@@ -315,9 +364,7 @@ function onLikePressed() {
         },
         type: 'POST',
         success: function (response) {
-            likeButton.removeChild(document.getElementById("likeHeart"));
-            likeButton.appendChild(createLikeHeartIcon(response.userLikedChapter));
-            document.getElementById("likesNumber").textContent = response.chapterLikes;
+            
         },
     });
 }
@@ -354,4 +401,9 @@ function createNewCommentVisualization(commentText, time, authorName) {
     infodiv.appendChild(namediv);
     comment.appendChild(infodiv);
     document.getElementById("comments").appendChild(comment);
+}
+
+function listItemOnBlur(el) {
+    el.readOnly = 'true';
+    onChapterRename(el);
 }

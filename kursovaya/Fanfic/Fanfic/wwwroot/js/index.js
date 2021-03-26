@@ -21,7 +21,8 @@ function getTags() {
             tagsDictionary.push({ "word": tagsData[i].name, "weight": tagsData[i].weight });
         }
         $("#wordCloud").jQWCloud({
-            cloud_color: 'yellow',
+            minFont: 20,
+            maxFont: 70,
             verticalEnabled: true,
             word_common_classes: "tagWords",
             words: tagsDictionary,

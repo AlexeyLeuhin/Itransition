@@ -22,7 +22,9 @@ namespace Fanfic.Data
 
         public long RatingId { get; set; }
         public User User { get; set; }
+        public string UserId { get; set; }
         public Tale Tale { get; set; }
+        public long TaleId { get; set; }
         public int Points { get; set; }
     }
 }

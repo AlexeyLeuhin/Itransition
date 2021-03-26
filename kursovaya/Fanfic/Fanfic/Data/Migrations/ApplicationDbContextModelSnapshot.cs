@@ -38,7 +38,7 @@ namespace Fanfic.Data.Migrations
                     b.Property<int>("SerialNumber")
                         .HasColumnType("int");
 
-                    b.Property<long?>("TaleId")
+                    b.Property<long>("TaleId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Text")
@@ -58,23 +58,23 @@ namespace Fanfic.Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("TaleId")
+                    b.Property<long>("TaleId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("TaleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -86,7 +86,7 @@ namespace Fanfic.Data.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("ChapterId")
+                    b.Property<long>("ChapterId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
@@ -111,7 +111,7 @@ namespace Fanfic.Data.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
-                    b.Property<long?>("TaleId")
+                    b.Property<long>("TaleId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
@@ -406,20 +406,24 @@ namespace Fanfic.Data.Migrations
                 {
                     b.HasOne("Fanfic.Data.Tale", "Tale")
                         .WithMany("Chapters")
-                        .HasForeignKey("TaleId");
+                        .HasForeignKey("TaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tale");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Comment", b =>
                 {
-                    b.HasOne("Fanfic.Data.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
                     b.HasOne("Fanfic.Data.Tale", "Tale")
                         .WithMany("Comments")
-                        .HasForeignKey("TaleId");
+                        .HasForeignKey("TaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Fanfic.Data.User", "Author")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Author");
 
@@ -430,20 +434,26 @@ namespace Fanfic.Data.Migrations
                 {
                     b.HasOne("Fanfic.Data.Chapter", "Chapter")
                         .WithMany("Likes")
-                        .HasForeignKey("ChapterId");
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Fanfic.Data.User", null)
+                    b.HasOne("Fanfic.Data.User", "User")
                         .WithMany("Likes")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Chapter");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Fanfic.Data.Rating", b =>
                 {
                     b.HasOne("Fanfic.Data.Tale", "Tale")
                         .WithMany("Ratings")
-                        .HasForeignKey("TaleId");
+                        .HasForeignKey("TaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Fanfic.Data.User", "User")
                         .WithMany("Ratings")
@@ -545,6 +555,8 @@ namespace Fanfic.Data.Migrations
 
             modelBuilder.Entity("Fanfic.Data.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Likes");
 
                     b.Navigation("Ratings");

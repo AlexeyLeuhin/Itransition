@@ -6,144 +6,164 @@
     Html.AntiForgeryToken();
 }
 
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Redressed&family=Roboto:ital,wght@0,700;1,900&display=swap" rel="stylesheet">
 
-
-<div class="container row">
+<h1 style="margin-bottom: 30px; text-align:center; font-size: 80px;">@Model.Tale.Name</h1>
+<div class="row">
     <input type="hidden" id="taleId" name="taleId" value="@Model.Tale.Id" />
     <input type="hidden" id="userId" name="userId" value="@Model.UserId" />
-    <div class="col-4 container tale-details-container">
-        <label>@Model.Tale.Name</label>
-        @if (Model.IsAuthor)
-        {
-            <ul class="list-group" id="items">
-                @foreach (var chapter in Model.Tale.Chapters)
-                {
-                    <li id="@chapter.Id" class="list-group-item">
-                        <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="this.readOnly='true';">
-                        <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                    </li>
 
-                }
-            </ul>
-            <button onclick="addChapter();" class="btn-primary">Add chapter</button>
-        }
-        else
-        {
-            <ul class="list-group">
-                @foreach (var chapter in Model.Tale.Chapters)
-                {
-                    <li class="list-group-item" id="@chapter.Id">
-                        <input readonly="readonly" value="@chapter.Name" />
-                    </li>
-                }
-            </ul>
-            @if (Model.CanRate)
+    <div class="col-3 tale-details-container">
+        <div class="tale-details-content">
+            <h3 style="margin: 10px;">Content</h3>
+            @if (Model.IsAuthor || User.IsInRole(nameof(Fanfic.Services.RoleInitializer.RoleType.ADMIN)))
             {
-                <h3>Leave your rating!</h3>
-                <input id="rating-id" type="text" class="rating" value="0" data-size="sm" data-show-clear="false" data-show-caption="false">
-            }
-            else if (User.Identity.IsAuthenticated)
-            {
-                <h3>You have already rated the tale!</h3>
-                <input type="text" class="rating" value="@Model.UserRating" data-size="sm" data-show-clear="false" data-show-caption="false" readonly="readonly">
+                <ul class="list-group" id="items">
+                    @foreach (var chapter in Model.Tale.Chapters)
+                    {
+                        <li id="@chapter.Id" class="list-group-item" style="margin-left:5px; margin-right:5px;">
+                            <input type="text" value="@chapter.Name" readonly="readonly" ondblclick="this.readOnly='';" onblur="listItemOnBlur(this);" style="width:100%;">
+                            <button value="@chapter.Id" onclick="deleteChapter(this.value)" class="transparent-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        </li>
+
+                    }
+                </ul>
+                <button onclick="addChapter();" class="btn create-tale-button">Add chapter</button>
             }
             else
             {
-                <p> <a href="Identity/Account/Login?returnUrl=/TaleDetails?taleId=@Model.Tale.Id">Sign in</a> to leave your rating</p>
-            }
-        }
-
-
-
-    </div>
-    <div class="col-7 container tale-details-container">
-        <h3 id="chapterNameLabel"></h3>
-
-        <div id="chaptersImages">
-            @foreach (var chapter in Model.Tale.Chapters)
-            {
-                <img id="chapterImage-@chapter.Id" src="@chapter.PictureUrl" hidden="hidden" width="40" height="40" />
-            }
-        </div>
-        @if (Model.IsAuthor)
-        {
-
-            <div class="container">
-                <div id="divUploadFile" hidden="hidden" style="width:200px; height:100px; border:1px solid; text-align:center;">
-                    <p>Drop file here</p>
-                </div>
-                <button hidden="hidden" id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
-                <img id="imgLoading" src="~/gifs/loading.gif" style="display:none; width:150px; height:150px;" />
-                <img id="chapterImage" />
-
-                <textarea id="chapterText">
-                        </textarea>
-                <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
-                <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
-                <button id="saveButton" hidden="hidden" onclick="saveChapterText();" class="btn-primary btn-success">Save changes</button>
-            </div>
-        }
-        else
-        {
-            <textarea id="chapterText" readonly="readonly">
-            </textarea>
-            <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
-            <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
-        }
-
-        @if (User.Identity.IsAuthenticated)
-        {
-            <div class="row">
-                <button id="likeButton" onclick="onLikePressed();" class="transparent-button" hidden="hidden"></button>
-                <label id="likesNumber" hidden="hidden"></label>
-            </div>
-            @if (!Model.IsAuthor)
-            {
-                <div class="form-group">
-                    <textarea id="commentInput"></textarea>
-                    <button class="btn-success" onclick="sendComment();">Send</button>
-                </div>
-                <div id="comments">
-                    @foreach (var comment in Model.Tale.Comments)
+                <ul class="list-group">
+                    @foreach (var chapter in Model.Tale.Chapters)
                     {
-                        <div class="container">
-                            <div class="row">
-                                <textarea readonly="readonly">@comment.Message</textarea>
-                            </div>
+                        <li class="list-group-item" id="@chapter.Id" style="margin-left:5px; margin-right:5px;">
+                            <input readonly="readonly" value="@chapter.Name" />
+                        </li>
+                    }
+                </ul>
+                @if (Model.CanRate)
+                {
+                    <h3>Leave your rating!</h3>
+                    <input id="rating-id" type="text" class="rating" value="0" data-size="sm" data-show-clear="false" data-show-caption="false">
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <h3>You have already rated the tale!</h3>
+                    <input type="text" class="rating" value="@Model.UserRating" data-size="sm" data-show-clear="false" data-show-caption="false" readonly="readonly">
+                }
+                else
+                {
+                    <p> <a href="Identity/Account/Login?returnUrl=/TaleDetails?taleId=@Model.Tale.Id">Sign in</a> to leave your rating</p>
+                }
+            }
 
-                            <div class="row">
-                                <div class="col-6">
-                                    <label>@comment.CreateTime</label>
-                                </div>
-                                <div class="col-6">
-                                    <label>@comment.Author.Name</label>
-                                </div>
-                            </div>
-                        </div>
+
+        </div>
+    </div>
+    <div class="col-9 tale-details-container">
+        <div id="rightColumn" class="tale-details-content " hidden="hidden">
+
+            <div class="row">
+                <div class="col-8">
+                    <label style="font-family: 'Redressed', cursive; font-size: 60px; word-break:break-all;" id="chapterNameLabel"></label>
+                </div>
+                <div class="col-4" id="chaptersImages">
+                    @foreach (var chapter in Model.Tale.Chapters)
+                    {
+                        <img id="chapterImage-@chapter.Id" src="@chapter.PictureUrl" class="rounded-circle chapter-image" width="200" height="200" hidden="hidden" />
                     }
                 </div>
-            }
-        }
-        else
-        {
-            <div class="row">
-                <a id="likeButton" href="Identity/Account/Login?returnUrl=/TaleDetails?taleId=@Model.Tale.Id" class="transparent-button" hidden="hidden"></a>
-                <label id="likesNumber" hidden="hidden"></label>
             </div>
-        }
+            @if (Model.IsAuthor || User.IsInRole(nameof(Fanfic.Services.RoleInitializer.RoleType.ADMIN)))
+            {
 
+                <div class="container">
+                    <div id="divUploadFile" class="drop-place">
+                        <p>Drop new image here</p>
+                    </div>
+                    <hr />
+                    <img id="imgLoading" src="~/gifs/loading.gif" style="display:none; width:150px; height:150px;" />
+
+                    <img id="chapterImage" />
+
+                    <div id="previewText" class="container"></div>
+                    <textarea id="chapterText" oninput="this.editor.update()" class="form-control" style="height: 300px;"> </textarea>
+
+
+
+                    <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
+                    <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
+                    <button id="saveButton" hidden="hidden" onclick="saveChapterText();" class="btn create-tale-button">Save changes</button>
+                </div>
+            }
+            else
+            {
+                <hr />
+                <div id="previewText" class="container"></div>
+
+                <button hidden="hidden" id="leftArrow" class="transparent-button"> <i class="fa fa-caret-left" aria-hidden="true"></i></button>
+                <button hidden="hidden" id="rightArrow" class="transparent-button"> <i class="fa fa-caret-right" aria-hidden="true"></i></button>
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="row" style="margin-left: 10px;">
+                    <button id="likeButton" onclick="onLikePressed();" class="transparent-button"></button>
+                    <label id="likesNumber"></label>
+                </div>
+                @if (!Model.IsAuthor)
+                {
+                    <div class="form-group">
+                        <textarea id="commentInput"></textarea>
+                        <button class="btn-success" onclick="sendComment();">Send</button>
+                    </div>
+                    <div id="comments">
+                        @foreach (var comment in Model.Tale.Comments)
+                        {
+                            <div class="container">
+                                <div class="row">
+                                    <textarea readonly="readonly">@comment.Message</textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>@comment.CreateTime</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>@comment.Author.Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="row" style="margin-left: 10px;">
+                    <a id="likeButton" href="Identity/Account/Login?returnUrl=/TaleDetails?taleId=@Model.Tale.Id" class="transparent-button"></a>
+                    <label id="likesNumber"></label>
+                </div>
+            }
+
+        </div>
     </div>
 
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="~/js/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+
+<script src="~/lib/markdownify/marked.js"></script>
+
+
+
+<script src="~/lib/compressorjs/dist/compressor.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-
 <script src="~/lib/jquery.filedrop.js"></script>
-
 <script src="~/lib/star-rating/star-rating.min.js"></script>
 <script src="~/js/sortablejs/Sortable.js"></script>
 <script src="~/js/taleDetails.js"></script>

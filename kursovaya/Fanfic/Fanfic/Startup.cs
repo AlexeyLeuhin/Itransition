@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Fanfic.Services.RoleInitializer;
 
 namespace Fanfic
 {
@@ -60,7 +61,7 @@ namespace Fanfic
                      twitterOptions.ConsumerSecret = Configuration["Authentication-Twitter-ConsumerSecret"];
                      twitterOptions.RetrieveUserDetails = true;
                  });
-            services.AddCoreAdmin();
+            services.AddCoreAdmin(nameof(RoleType.ADMIN));
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             services.AddSignalR();
         }

@@ -142,6 +142,10 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
             "jQuery.UI.Combined": {
               "target": "Package",
               "version": "[1.12.1, )"

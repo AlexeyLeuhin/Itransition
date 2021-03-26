@@ -99,7 +99,7 @@ namespace Fanfic.Areas.TaleDetails
         {
             Tale tale = await _dbContext.Tales.FindAsync(taleId);
             tale.ChaptersCount += 1;
-            Chapter chapter = new Chapter(tale, "New chapter", tale.ChaptersCount - 1);
+            Chapter chapter = new Chapter(tale, "New chapter", tale.ChaptersCount - 1, "", "/chapterPlaceholder.png");
             await _dbContext.Chapters.AddAsync(chapter);
             _dbContext.Update(tale);
             _dbContext.SaveChanges();
@@ -189,24 +189,17 @@ namespace Fanfic.Areas.TaleDetails
             if (like != null)
             {
                 userLikedChapter = false;
-                _dbContext.Remove(like);
-                chapter.LikesNumber -= 1;
+                await _dbContext.DeleteLike(chapter, like);
             }
             else
             {
                 userLikedChapter = true;
-                like = new Like();
-                like.UserId = user.Id;
-                await _dbContext.Likes.AddAsync(like);
-                await _dbContext.SaveChangesAsync();
-                chapter.LikesNumber += 1;
-                like.Chapter = chapter;
-                _dbContext.Update(like);
+                await _dbContext.CreateLike(chapter, user);
             }
-            _dbContext.Update(chapter);
-            await _dbContext.SaveChangesAsync();
             int chapterLikes = chapter.LikesNumber;
             return new JsonResult(new { chapterLikes, userLikedChapter });
          }
+
+
     }
 }

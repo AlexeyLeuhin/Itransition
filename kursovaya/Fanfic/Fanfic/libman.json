@@ -35,6 +35,34 @@
         "jquery-ui.css",
         "jquery-ui.theme.min.css"
       ]
+    },
+    {
+      "library": "compressorjs@1.0.7",
+      "destination": "wwwroot/lib/compressorjs/",
+      "files": [
+        "dist/compressor.js"
+      ]
+    },
+    {
+      "library": "textarea-markdown@1.3.1",
+      "destination": "wwwroot/lib/textarea-markdown/",
+      "files": [
+        "lib/textarea-markdown.js"
+      ]
+    },
+    {
+      "library": "markdownify@0.1.0",
+      "destination": "wwwroot/lib/markdownify/",
+      "files": [
+        "markdownify.js"
+      ]
+    },
+    {
+      "library": "markdown-js@0.0.4",
+      "destination": "wwwroot/lib/markdown-js/",
+      "files": [
+        "lib/markdown.js"
+      ]
     }
   ]
 }

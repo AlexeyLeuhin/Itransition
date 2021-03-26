@@ -24,7 +24,7 @@ function addTag() {
 function addTagVizualization(tagText) {
     let li = document.createElement("li");
     let lbl = document.createElement("label");
-    lbl.textContent = tagText;
+    lbl.textContent = "#" + tagText;
     li.appendChild(lbl);
     document.getElementById("addedTags").appendChild(li);
 }

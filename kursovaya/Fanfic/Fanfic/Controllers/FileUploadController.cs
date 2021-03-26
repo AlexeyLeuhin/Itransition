@@ -3,11 +3,9 @@ using Fanfic.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Web;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Fanfic.Services;
+using System.Reflection.Metadata;
 
 namespace Fanfic.Controllers
 {
@@ -31,8 +29,7 @@ namespace Fanfic.Controllers
             string blobName = "user - " + user.Id + " - avatar";
             user.AvatarPath = await _blobService.UploadToBlobContainerAsync(avatar, blobName, "avatarcontainer");    //to keystore
             await _userManager.UpdateAsync(user);
-            return null;
-            
+            return Ok();
         }
 
         [HttpPost]

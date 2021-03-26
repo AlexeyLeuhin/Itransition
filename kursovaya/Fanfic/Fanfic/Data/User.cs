@@ -13,5 +13,6 @@ namespace Fanfic.Data
         public string AvatarPath { get; set; }
         public List<Rating> Ratings { get; set; } = new List<Rating>();
         public List<Like> Likes { get; set; } = new List<Like>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

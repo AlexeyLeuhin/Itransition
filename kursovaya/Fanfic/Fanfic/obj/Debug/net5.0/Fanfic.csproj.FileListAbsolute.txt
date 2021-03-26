@@ -419,3 +419,4 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.Analysis.Co
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.Queries.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.QueryParser.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Lucene.Net.Sandbox.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\SixLabors.ImageSharp.dll

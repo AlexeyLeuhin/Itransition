@@ -23,6 +23,7 @@ namespace Fanfic.Data
 
         public long Id { get; set; }
         public Tale Tale { get; set; }
+        public long TaleId { get; set; }
         public string Name { get; set; }
         public string Text { get; set; }
         public string PictureUrl { get; set; }

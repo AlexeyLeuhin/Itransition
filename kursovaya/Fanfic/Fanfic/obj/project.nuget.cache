@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NEVkuKhwbV373HNTak0RsEpXOXYLrLZtNCxsaXC8Og5SM216AoRizcTFE417+twhJBZhAdgddpbV72IFMQsEFQ==",
+  "dgSpecHash": "vTBnlosWA0kxskqIQjZN8YAPu41gCNzwtytiLmUHnGBrGw5Xsr2lTnDtO3sGmp20Moa6WoXx7gsaIfCL3+F08g==",
   "success": true,
   "projectFilePath": "D:\\itra\\itra_rep\\kursovaya\\Fanfic\\Fanfic\\Fanfic.csproj",
   "expectedPackageFiles": [
@@ -160,6 +160,7 @@
     "C:\\Microsoft\\Xamarin\\NuGet\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\sixlabors.imagesharp\\1.0.3\\sixlabors.imagesharp.1.0.3.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

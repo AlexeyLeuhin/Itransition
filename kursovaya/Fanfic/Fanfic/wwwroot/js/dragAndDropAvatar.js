@@ -9,18 +9,37 @@
         maxfiles: 1,
         maxfilesize: 5,
         dragOver: function () {
-            $("#divUploadFile").addClass('');
+            document.getElementById("divUploadFile").classList.add('drop-place-active');
         },
         dragLeave: function () {
-            $("#divUploadFile").addClass('');
+            $("#divUploadFile").removeClass('drop-place-active');
         },
         drop: function () {
             $("#imgLoading").show();
         },
-        afterAll: function () {
-            $("#divUploadFile").addClass('');
-            $("#imgLoading").hide();
-            location.reload();
+        beforeEach: function (file) {
+            new Compressor(file, {
+                quality: 0.6,
+                width: 600,
+                height: 600,
+                success(result) {
+                    const formData = new FormData();
+                    formData.append('avatar', result, result.name);
+                    $.ajax({
+                        url: "/FileUpload/UploadAvatar",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        type: 'Post',
+                        success: function (response) {
+                            $("#divUploadFile").removeClass('drop-place-active');
+                            $("#imgLoading").hide();
+                            location.reload();
+                        }
+                    }); 
+                }
+            })
+            return false;
         }
     });    
     

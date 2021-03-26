@@ -18,7 +18,9 @@ namespace Fanfic.Data
             this.Chapter = chapter;
         }
         public long LikeId { get; set; }
+        public User User { get; set; }
         public string UserId { get; set; }
         public Chapter Chapter { get; set; }
+        public long ChapterId { get; set; }
     }
 }

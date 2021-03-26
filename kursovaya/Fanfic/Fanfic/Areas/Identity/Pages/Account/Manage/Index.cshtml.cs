@@ -51,7 +51,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public IFormFile Avatar { get; set; }
+        public string AvatarPath { get; set; }
 
         public class InputModel
         {
@@ -64,9 +64,6 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Age")]
             public ushort Age { get; set; }
-
-            public string AvatarPath { get; set; }
-           
         }
 
         private async Task LoadAsync(User user)
@@ -75,12 +72,8 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var name =user.Name;
             var age = user.Age;
-            var avatarPath = user.AvatarPath;
-            if(avatarPath == null)
-            {
-                avatarPath = _configuration["Default-avatar-path"]; 
-            }
-
+            AvatarPath = user.AvatarPath;
+            AvatarPath ??= _configuration["Default-avatar-path"]; 
             Username = userName;
 
             Input = new InputModel
@@ -88,7 +81,6 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber,
                 Name = name,
                 Age = age,
-                AvatarPath = avatarPath
             };
         }
         
@@ -139,13 +131,6 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             {
                 user.Age = Input.Age;
             }
-
-            if (Avatar != null)
-            {
-                string blobName = "user - " + user.Id + " - avatar";
-                await _blobService.UploadToBlobContainerAsync(Avatar, blobName, "avatarcontainer");
-            }
-
 
             await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);

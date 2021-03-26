@@ -400,3 +400,10 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\Fanfic.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\ref\Fanfic.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\Fanfic.pdb
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\Fanfic.genruntimeconfig.cache
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\J2N.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\Lucene.Net.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\Lucene.Net.Analysis.Common.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\Lucene.Net.Queries.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\Lucene.Net.QueryParser.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\Lucene.Net.Sandbox.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Release\net5.0\SixLabors.ImageSharp.dll

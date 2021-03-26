@@ -32,6 +32,10 @@
           "Azure.Security.KeyVault.Secrets": "4.2.0-beta.4",
           "Azure.Storage.Blobs": "12.9.0-beta.1",
           "CoreAdmin": "1.2.0",
+          "Lucene.Net": "4.8.0-beta00013",
+          "Lucene.Net.Analysis.Common": "4.8.0-beta00013",
+          "Lucene.Net.Queries": "4.8.0-beta00013",
+          "Lucene.Net.QueryParser": "4.8.0-beta00013",
           "Microsoft.AspNet.Mvc": "5.2.7",
           "Microsoft.AspNetCore.Authentication.Facebook": "5.0.3",
           "Microsoft.AspNetCore.Authentication.Google": "5.0.3",
@@ -45,6 +49,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "5.0.3",
           "Microsoft.Extensions.Configuration.AzureKeyVault": "3.1.12",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
+          "SixLabors.ImageSharp": "1.0.3",
           "jQuery.UI.Combined": "1.12.1",
           "jQuery.filedrop": "1.0.1",
           "Microsoft.AspNetCore.Antiforgery.Reference": "5.0.0.0",
@@ -495,11 +500,99 @@
           }
         }
       },
+      "J2N/2.0.0-beta-0010": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Text.Encoding.CodePages": "4.7.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/J2N.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/J2N.dll": {}
+        }
+      },
       "jQuery/1.12.4": {},
       "jQuery.filedrop/1.0.1": {},
       "jQuery.UI.Combined/1.12.1": {
         "dependencies": {
           "jQuery": "1.12.4"
+        }
+      },
+      "Lucene.Net/4.8.0-beta00013": {
+        "dependencies": {
+          "J2N": "2.0.0-beta-0010",
+          "Microsoft.Extensions.Configuration.Abstractions": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Lucene.Net.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.8.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Lucene.Net.dll": {}
+        }
+      },
+      "Lucene.Net.Analysis.Common/4.8.0-beta00013": {
+        "dependencies": {
+          "Lucene.Net": "4.8.0-beta00013"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Lucene.Net.Analysis.Common.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.8.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Lucene.Net.Analysis.Common.dll": {}
+        }
+      },
+      "Lucene.Net.Queries/4.8.0-beta00013": {
+        "dependencies": {
+          "Lucene.Net": "4.8.0-beta00013"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Lucene.Net.Queries.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.8.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Lucene.Net.Queries.dll": {}
+        }
+      },
+      "Lucene.Net.QueryParser/4.8.0-beta00013": {
+        "dependencies": {
+          "Lucene.Net.Analysis.Common": "4.8.0-beta00013",
+          "Lucene.Net.Queries": "4.8.0-beta00013",
+          "Lucene.Net.Sandbox": "4.8.0-beta00013"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Lucene.Net.QueryParser.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.8.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Lucene.Net.QueryParser.dll": {}
+        }
+      },
+      "Lucene.Net.Sandbox/4.8.0-beta00013": {
+        "dependencies": {
+          "Lucene.Net": "4.8.0-beta00013"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Lucene.Net.Sandbox.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.8.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/Lucene.Net.Sandbox.dll": {}
         }
       },
       "Microsoft.AspNet.Mvc/5.2.7": {
@@ -2168,6 +2261,17 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "SixLabors.ImageSharp/1.0.3": {
+        "runtime": {
+          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.3.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -4899,6 +5003,13 @@
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
     },
+    "J2N/2.0.0-beta-0010": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qjohqt+5Hx4ILGbyN4Eo21YQBlOtOifFJn4SBxNqvFf1miQ7wMXxJgQeBDfrDA5ya6Z0T1JYeDTbJVanJLJAYw==",
+      "path": "j2n/2.0.0-beta-0010",
+      "hashPath": "j2n.2.0.0-beta-0010.nupkg.sha512"
+    },
     "jQuery/1.12.4": {
       "type": "package",
       "serviceable": true,
@@ -4919,6 +5030,41 @@
       "sha512": "sha512-5B0LrPZ0TLlwplPRu43h7fgMtDxMMEF31HajUqHSOJ7bC6nyJUJy7AkcuGaJdBrrZAZutnSBgXT01BGiIIC4TQ==",
       "path": "jquery.ui.combined/1.12.1",
       "hashPath": "jquery.ui.combined.1.12.1.nupkg.sha512"
+    },
+    "Lucene.Net/4.8.0-beta00013": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-M6M548blFLZUPfxFELwUKz8d68JWFgTKh4W9jlWxVg2xXQWSwOf0r7a++UTKsVFngp1OvGHMNd1Z72vFzq9I9w==",
+      "path": "lucene.net/4.8.0-beta00013",
+      "hashPath": "lucene.net.4.8.0-beta00013.nupkg.sha512"
+    },
+    "Lucene.Net.Analysis.Common/4.8.0-beta00013": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iAdcOj9UKl/bCvZF+Nm0T3ELjq4i1bWf5xNIeayFkIEVt7+M91i9ozoDx4eVmppKM0SjZwILNkYY5R21XN+Mug==",
+      "path": "lucene.net.analysis.common/4.8.0-beta00013",
+      "hashPath": "lucene.net.analysis.common.4.8.0-beta00013.nupkg.sha512"
+    },
+    "Lucene.Net.Queries/4.8.0-beta00013": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NPbPMNyd8rwq2Y+CCz8G7QQpRY30yk1Qs32Zal3W61eEyagJxPiwUIvqF+RHn/+EOyS9/5bZ7fLLTy2eWjFglg==",
+      "path": "lucene.net.queries/4.8.0-beta00013",
+      "hashPath": "lucene.net.queries.4.8.0-beta00013.nupkg.sha512"
+    },
+    "Lucene.Net.QueryParser/4.8.0-beta00013": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-O6steV0aWOJ+pdwdEySZyi+pKYymXEiZ0kTMAt//1kB6YbBZJEEy/mZpTj78lN5lz4sEBZANDP6eBj2GVxAOKw==",
+      "path": "lucene.net.queryparser/4.8.0-beta00013",
+      "hashPath": "lucene.net.queryparser.4.8.0-beta00013.nupkg.sha512"
+    },
+    "Lucene.Net.Sandbox/4.8.0-beta00013": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VdL2DpA0lZtXPkSOSr7eLUqd1SM24pVoOm9cAxBxs6Yv8ct88H8R0iR3EcO3ZGqo0NpbHC9429is2BoxaEOhPw==",
+      "path": "lucene.net.sandbox/4.8.0-beta00013",
+      "hashPath": "lucene.net.sandbox.4.8.0-beta00013.nupkg.sha512"
     },
     "Microsoft.AspNet.Mvc/5.2.7": {
       "type": "package",
@@ -5878,6 +6024,13 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/1.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oRmZEITad+0tL22ZfAbLps6doDV+Z0/oH0dtXLpIBwn1sgai3QxxDQPjohHiDeUp/CTzRKVrFFbc4ZITnL2UBg==",
+      "path": "sixlabors.imagesharp/1.0.3",
+      "hashPath": "sixlabors.imagesharp.1.0.3.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

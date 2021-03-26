@@ -49,6 +49,29 @@ namespace Fanfic.Data
             this.SaveChanges();
         }
 
+        public async Task DeleteLike(Chapter chapter, Like like)
+        {
+            this.Remove(like);
+            chapter.LikesNumber -= 1;
+            this.Update(chapter);
+            await this.SaveChangesAsync();
+        }
+
+        public async Task CreateLike(Chapter chapter, User user)
+        {
+            Like like = new Like();
+            like.UserId = user.Id;
+            like.ChapterId = chapter.Id;
+            await this.Likes.AddAsync(like);
+            await this.SaveChangesAsync();
+            chapter.LikesNumber += 1;
+            like.Chapter = chapter;
+            like.User = user;
+            this.Update(like);
+            this.Update(chapter);
+            await this.SaveChangesAsync();
+        }
+
         public DbSet<Tale> Tales { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Rating> Ratings { get; set; }
