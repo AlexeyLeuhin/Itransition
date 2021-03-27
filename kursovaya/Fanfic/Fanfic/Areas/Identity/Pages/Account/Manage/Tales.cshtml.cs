@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanfic.Data;
+using Fanfic.Models;
 using Fanfic.Services.Filtrator;
 using Fanfic.Services.Sorter;
 using Microsoft.AspNetCore.Identity;
@@ -62,37 +63,7 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
             public string Tags { get; set; }
         }
 
-        public class PaginationModel
-        {
-                public int PageNumber { get; private set; }
-                public int TotalPages { get; private set; }
-
-                public PaginationModel()
-                {   
-
-                }
-                public PaginationModel(long dataSize, int pageNumber, int pageSize)
-                {
-                    PageNumber = pageNumber;
-                    TotalPages = (int)Math.Ceiling(dataSize / (double)pageSize);
-                }
-
-                public bool HasPreviousPage
-                {
-                    get
-                    {
-                        return (PageNumber > 1);
-                    }
-                }
-
-                public bool HasNextPage
-                {
-                    get
-                    {
-                        return (PageNumber < TotalPages);
-                    }
-                }
-        }
+        
 
         public TalesModel (ApplicationDbContext dbContext, UserManager<User> userManager, ITaleSortService taleSorter, ITaleFilterService taleFiltrator)
         {
@@ -137,35 +108,15 @@ namespace Fanfic.Areas.Identity.Pages.Account.Manage
                 await OnGetAsync(null);
                 return null;
             }
-            Tale tale = new Tale(_userManager.GetUserAsync(User).Result, Input.Name, Input.ShortDescription, Input.Ganre, DateTime.Now);
-            if (Input.Tags != null)
-            {
-                foreach (string tag in Input.Tags.Split(" ").ToList())
-                {
-                    Tag newTag = await _dbContext.Tags.FindAsync(tag);
-                    if (newTag == null)
-                    {
-                        newTag = new Tag(tag);
-                        await _dbContext.Tags.AddAsync(newTag);
-                    }
-                    else
-                    {
-                        newTag.Weight += 1;
-                        _dbContext.Update(newTag);
-                    }
-                    tale.Tags.Add(newTag);
-                }
-            }
-            await _dbContext.AddAsync(tale);
-            _dbContext.SaveChanges();     
+            await _dbContext.CreateTale(_userManager.GetUserAsync(User).Result, Input.Name, Input.ShortDescription, Input.Ganre, Input.Tags);     
             return RedirectToPage("Tales");
         }
 
-        public async Task<IActionResult> OnPostDeleteTale(long Id, int pageNumber, SortState sortType, TaleGanre? filterGanre)
+        public async Task<IActionResult> OnPostDeleteTale(long Id)
         {
             await _dbContext.DeleteTale(Id);
             await _dbContext.SaveChangesAsync();
-            return RedirectToPage("Tales", new { pageNumber, sortType, filterGanre });
+            return RedirectToPage("Tales");
         }
 
         public IActionResult OnGetAutocompleteSearch(string term)

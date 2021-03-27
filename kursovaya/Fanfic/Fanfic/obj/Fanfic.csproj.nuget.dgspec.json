@@ -72,22 +72,6 @@
               "target": "Package",
               "version": "[1.2.0, )"
             },
-            "Lucene.Net": {
-              "target": "Package",
-              "version": "[4.8.0-beta00013, )"
-            },
-            "Lucene.Net.Analysis.Common": {
-              "target": "Package",
-              "version": "[4.8.0-beta00013, )"
-            },
-            "Lucene.Net.Queries": {
-              "target": "Package",
-              "version": "[4.8.0-beta00013, )"
-            },
-            "Lucene.Net.QueryParser": {
-              "target": "Package",
-              "version": "[4.8.0-beta00013, )"
-            },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
               "version": "[5.2.7, )"
@@ -141,10 +125,6 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
-            },
-            "SixLabors.ImageSharp": {
-              "target": "Package",
-              "version": "[1.0.3, )"
             },
             "jQuery.UI.Combined": {
               "target": "Package",

@@ -15,10 +15,6 @@
     <PackageReference Include="CoreAdmin" Version="1.2.0" />
     <PackageReference Include="jQuery.filedrop" Version="1.0.1" />
     <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
-    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00013" />
-    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00013" />
-    <PackageReference Include="Lucene.Net.Queries" Version="4.8.0-beta00013" />
-    <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00013" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.3" />
@@ -35,11 +31,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.12" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Search\" />
     <Folder Include="wwwroot\avatars\" />
   </ItemGroup>
 

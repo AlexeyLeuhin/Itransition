@@ -139,7 +139,7 @@ function constructNewChapterListItem(newChapterId) {
     input.value = "New chapter";
     input.readOnly = true;
     input.ondblclick = function() { this.readOnly = false; };
-    input.onblur = listItemOnBlur(this);
+    input.onblur = function() { listItemOnBlur(this); }
     li.appendChild(input);
     li.classList.add("list-group-item");
     let btn = document.createElement('button');

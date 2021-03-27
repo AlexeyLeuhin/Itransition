@@ -139,7 +139,7 @@ function constructNewChapterListItem(newChapterId) {
     input.value = "New chapter";
     input.readOnly = true;
     input.ondblclick = function() { this.readOnly = false; };
-    input.onblur = listItemOnBlur(this);
+    input.onblur = function() { listItemOnBlur(this); }
     li.appendChild(input);
     li.classList.add("list-group-item");
     let btn = document.createElement('button');
@@ -305,16 +305,18 @@ function onSelect(listElement) {
 
 function onChapterRename(element) {
     let newName = element.value;
-    $.ajax({
-        url: "TaleDetails?handler=RenameChapter",
-        data: { "chapterId": selectedItem.id, "newName": newName },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("XSRF-TOKEN",
-                $('input:hidden[name="__RequestVerificationToken"]').val());
-        },
-        type: 'POST'
-    });
-    document.getElementById("chapterNameLabel").textContent = newName;
+    if (newName) {
+        $.ajax({
+            url: "TaleDetails?handler=RenameChapter",
+            data: { "chapterId": selectedItem.id, "newName": newName },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            type: 'POST'
+        });
+        document.getElementById("chapterNameLabel").textContent = newName;
+    }
 }
 
 function saveChapterText() {

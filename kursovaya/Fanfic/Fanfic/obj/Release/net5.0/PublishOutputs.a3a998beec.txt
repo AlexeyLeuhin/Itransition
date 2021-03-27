@@ -169,12 +169,6 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Azure.Sto
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\DotNetEd.CoreAdmin.Views.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\DotNetEd.CoreAdmin.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Humanizer.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\J2N.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.Analysis.Common.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.Queries.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.QueryParser.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Lucene.Net.Sandbox.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Web.Mvc.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Web.Razor.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Web.Helpers.dll
@@ -241,7 +235,6 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Microsoft
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Microsoft.Web.Infrastructure.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\Mvc.Grid.Core.dll
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\SixLabors.ImageSharp.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Composition.AttributedModel.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Composition.Convention.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Release\net5.0\PubTmp\Out\System.Composition.Hosting.dll

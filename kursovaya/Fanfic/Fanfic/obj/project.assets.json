@@ -155,19 +155,6 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
-      "J2N/2.0.0-beta-0010": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.4.0",
-          "System.Text.Encoding.CodePages": "4.3.0"
-        },
-        "compile": {
-          "lib/netcoreapp3.0/J2N.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/J2N.dll": {}
-        }
-      },
       "jQuery/1.12.4": {
         "type": "package"
       },
@@ -178,69 +165,6 @@
         "type": "package",
         "dependencies": {
           "jQuery": "1.12.4"
-        }
-      },
-      "Lucene.Net/4.8.0-beta00013": {
-        "type": "package",
-        "dependencies": {
-          "J2N": "2.0.0-beta-0010",
-          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.1/Lucene.Net.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Lucene.Net.dll": {}
-        }
-      },
-      "Lucene.Net.Analysis.Common/4.8.0-beta00013": {
-        "type": "package",
-        "dependencies": {
-          "Lucene.Net": "4.8.0-beta00013"
-        },
-        "compile": {
-          "lib/netstandard2.1/Lucene.Net.Analysis.Common.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Lucene.Net.Analysis.Common.dll": {}
-        }
-      },
-      "Lucene.Net.Queries/4.8.0-beta00013": {
-        "type": "package",
-        "dependencies": {
-          "Lucene.Net": "4.8.0-beta00013"
-        },
-        "compile": {
-          "lib/netstandard2.1/Lucene.Net.Queries.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Lucene.Net.Queries.dll": {}
-        }
-      },
-      "Lucene.Net.QueryParser/4.8.0-beta00013": {
-        "type": "package",
-        "dependencies": {
-          "Lucene.Net.Analysis.Common": "4.8.0-beta00013",
-          "Lucene.Net.Queries": "4.8.0-beta00013",
-          "Lucene.Net.Sandbox": "4.8.0-beta00013"
-        },
-        "compile": {
-          "lib/netstandard2.1/Lucene.Net.QueryParser.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Lucene.Net.QueryParser.dll": {}
-        }
-      },
-      "Lucene.Net.Sandbox/4.8.0-beta00013": {
-        "type": "package",
-        "dependencies": {
-          "Lucene.Net": "4.8.0-beta00013"
-        },
-        "compile": {
-          "lib/netstandard2.1/Lucene.Net.Sandbox.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.1/Lucene.Net.Sandbox.dll": {}
         }
       },
       "Microsoft.AspNet.Mvc/5.2.7": {
@@ -2346,15 +2270,6 @@
           }
         }
       },
-      "SixLabors.ImageSharp/1.0.3": {
-        "type": "package",
-        "compile": {
-          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4213,31 +4128,6 @@
         "logo.png"
       ]
     },
-    "J2N/2.0.0-beta-0010": {
-      "sha512": "qjohqt+5Hx4ILGbyN4Eo21YQBlOtOifFJn4SBxNqvFf1miQ7wMXxJgQeBDfrDA5ya6Z0T1JYeDTbJVanJLJAYw==",
-      "type": "package",
-      "path": "j2n/2.0.0-beta-0010",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "j2n-icon-100x100.png",
-        "j2n.2.0.0-beta-0010.nupkg.sha512",
-        "j2n.nuspec",
-        "lib/net40/J2N.dll",
-        "lib/net40/J2N.xml",
-        "lib/net45/J2N.dll",
-        "lib/net45/J2N.xml",
-        "lib/netcoreapp3.0/J2N.dll",
-        "lib/netcoreapp3.0/J2N.xml",
-        "lib/netstandard1.3/J2N.dll",
-        "lib/netstandard1.3/J2N.xml",
-        "lib/netstandard2.0/J2N.dll",
-        "lib/netstandard2.0/J2N.xml",
-        "lib/netstandard2.1/J2N.dll",
-        "lib/netstandard2.1/J2N.xml"
-      ]
-    },
     "jQuery/1.12.4": {
       "sha512": "pIYtWlFI5PGlJVB8jm9H96pAQ27jQhA9sCxMeGweeC3ByQRaB8BwkIuGdTt4go3IEKTmmfRC2y5k0FLFizWDQg==",
       "type": "package",
@@ -4326,111 +4216,6 @@
         "Tools/uninstall.ps1",
         "jquery.ui.combined.1.12.1.nupkg.sha512",
         "jquery.ui.combined.nuspec"
-      ]
-    },
-    "Lucene.Net/4.8.0-beta00013": {
-      "sha512": "M6M548blFLZUPfxFELwUKz8d68JWFgTKh4W9jlWxVg2xXQWSwOf0r7a++UTKsVFngp1OvGHMNd1Z72vFzq9I9w==",
-      "type": "package",
-      "path": "lucene.net/4.8.0-beta00013",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "NOTICE.txt",
-        "analyzers/dotnet/cs/Lucene.Net.CodeAnalysis.CSharp.dll",
-        "analyzers/dotnet/vb/Lucene.Net.CodeAnalysis.VisualBasic.dll",
-        "lib/net45/Lucene.Net.dll",
-        "lib/net45/Lucene.Net.xml",
-        "lib/netstandard2.0/Lucene.Net.dll",
-        "lib/netstandard2.0/Lucene.Net.xml",
-        "lib/netstandard2.1/Lucene.Net.dll",
-        "lib/netstandard2.1/Lucene.Net.xml",
-        "lucene-net-icon-128x128.png",
-        "lucene.net.4.8.0-beta00013.nupkg.sha512",
-        "lucene.net.nuspec",
-        "tools/install.ps1",
-        "tools/uninstall.ps1"
-      ]
-    },
-    "Lucene.Net.Analysis.Common/4.8.0-beta00013": {
-      "sha512": "iAdcOj9UKl/bCvZF+Nm0T3ELjq4i1bWf5xNIeayFkIEVt7+M91i9ozoDx4eVmppKM0SjZwILNkYY5R21XN+Mug==",
-      "type": "package",
-      "path": "lucene.net.analysis.common/4.8.0-beta00013",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "NOTICE.txt",
-        "lib/net45/Lucene.Net.Analysis.Common.dll",
-        "lib/net45/Lucene.Net.Analysis.Common.xml",
-        "lib/netstandard2.0/Lucene.Net.Analysis.Common.dll",
-        "lib/netstandard2.0/Lucene.Net.Analysis.Common.xml",
-        "lib/netstandard2.1/Lucene.Net.Analysis.Common.dll",
-        "lib/netstandard2.1/Lucene.Net.Analysis.Common.xml",
-        "lucene-net-icon-128x128.png",
-        "lucene.net.analysis.common.4.8.0-beta00013.nupkg.sha512",
-        "lucene.net.analysis.common.nuspec"
-      ]
-    },
-    "Lucene.Net.Queries/4.8.0-beta00013": {
-      "sha512": "NPbPMNyd8rwq2Y+CCz8G7QQpRY30yk1Qs32Zal3W61eEyagJxPiwUIvqF+RHn/+EOyS9/5bZ7fLLTy2eWjFglg==",
-      "type": "package",
-      "path": "lucene.net.queries/4.8.0-beta00013",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "NOTICE.txt",
-        "lib/net45/Lucene.Net.Queries.dll",
-        "lib/net45/Lucene.Net.Queries.xml",
-        "lib/netstandard2.0/Lucene.Net.Queries.dll",
-        "lib/netstandard2.0/Lucene.Net.Queries.xml",
-        "lib/netstandard2.1/Lucene.Net.Queries.dll",
-        "lib/netstandard2.1/Lucene.Net.Queries.xml",
-        "lucene-net-icon-128x128.png",
-        "lucene.net.queries.4.8.0-beta00013.nupkg.sha512",
-        "lucene.net.queries.nuspec"
-      ]
-    },
-    "Lucene.Net.QueryParser/4.8.0-beta00013": {
-      "sha512": "O6steV0aWOJ+pdwdEySZyi+pKYymXEiZ0kTMAt//1kB6YbBZJEEy/mZpTj78lN5lz4sEBZANDP6eBj2GVxAOKw==",
-      "type": "package",
-      "path": "lucene.net.queryparser/4.8.0-beta00013",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "NOTICE.txt",
-        "lib/net45/Lucene.Net.QueryParser.dll",
-        "lib/net45/Lucene.Net.QueryParser.xml",
-        "lib/netstandard2.0/Lucene.Net.QueryParser.dll",
-        "lib/netstandard2.0/Lucene.Net.QueryParser.xml",
-        "lib/netstandard2.1/Lucene.Net.QueryParser.dll",
-        "lib/netstandard2.1/Lucene.Net.QueryParser.xml",
-        "lucene-net-icon-128x128.png",
-        "lucene.net.queryparser.4.8.0-beta00013.nupkg.sha512",
-        "lucene.net.queryparser.nuspec"
-      ]
-    },
-    "Lucene.Net.Sandbox/4.8.0-beta00013": {
-      "sha512": "VdL2DpA0lZtXPkSOSr7eLUqd1SM24pVoOm9cAxBxs6Yv8ct88H8R0iR3EcO3ZGqo0NpbHC9429is2BoxaEOhPw==",
-      "type": "package",
-      "path": "lucene.net.sandbox/4.8.0-beta00013",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "NOTICE.txt",
-        "lib/net45/Lucene.Net.Sandbox.dll",
-        "lib/net45/Lucene.Net.Sandbox.xml",
-        "lib/netstandard2.0/Lucene.Net.Sandbox.dll",
-        "lib/netstandard2.0/Lucene.Net.Sandbox.xml",
-        "lib/netstandard2.1/Lucene.Net.Sandbox.dll",
-        "lib/netstandard2.1/Lucene.Net.Sandbox.xml",
-        "lucene-net-icon-128x128.png",
-        "lucene.net.sandbox.4.8.0-beta00013.nupkg.sha512",
-        "lucene.net.sandbox.nuspec"
       ]
     },
     "Microsoft.AspNet.Mvc/5.2.7": {
@@ -7349,30 +7134,6 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "SixLabors.ImageSharp/1.0.3": {
-      "sha512": "oRmZEITad+0tL22ZfAbLps6doDV+Z0/oH0dtXLpIBwn1sgai3QxxDQPjohHiDeUp/CTzRKVrFFbc4ZITnL2UBg==",
-      "type": "package",
-      "path": "sixlabors.imagesharp/1.0.3",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net472/SixLabors.ImageSharp.dll",
-        "lib/net472/SixLabors.ImageSharp.xml",
-        "lib/netcoreapp2.1/SixLabors.ImageSharp.dll",
-        "lib/netcoreapp2.1/SixLabors.ImageSharp.xml",
-        "lib/netcoreapp3.1/SixLabors.ImageSharp.dll",
-        "lib/netcoreapp3.1/SixLabors.ImageSharp.xml",
-        "lib/netstandard1.3/SixLabors.ImageSharp.dll",
-        "lib/netstandard1.3/SixLabors.ImageSharp.xml",
-        "lib/netstandard2.0/SixLabors.ImageSharp.dll",
-        "lib/netstandard2.0/SixLabors.ImageSharp.xml",
-        "lib/netstandard2.1/SixLabors.ImageSharp.dll",
-        "lib/netstandard2.1/SixLabors.ImageSharp.xml",
-        "sixlabors.imagesharp.1.0.3.nupkg.sha512",
-        "sixlabors.imagesharp.128.png",
-        "sixlabors.imagesharp.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -12106,10 +11867,6 @@
       "Azure.Security.KeyVault.Secrets >= 4.2.0-beta.4",
       "Azure.Storage.Blobs >= 12.9.0-beta.1",
       "CoreAdmin >= 1.2.0",
-      "Lucene.Net >= 4.8.0-beta00013",
-      "Lucene.Net.Analysis.Common >= 4.8.0-beta00013",
-      "Lucene.Net.Queries >= 4.8.0-beta00013",
-      "Lucene.Net.QueryParser >= 4.8.0-beta00013",
       "Microsoft.AspNet.Mvc >= 5.2.7",
       "Microsoft.AspNetCore.Authentication.Facebook >= 5.0.3",
       "Microsoft.AspNetCore.Authentication.Google >= 5.0.3",
@@ -12123,7 +11880,6 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.3",
       "Microsoft.Extensions.Configuration.AzureKeyVault >= 3.1.12",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
-      "SixLabors.ImageSharp >= 1.0.3",
       "jQuery.UI.Combined >= 1.12.1",
       "jQuery.filedrop >= 1.0.1"
     ]
@@ -12200,22 +11956,6 @@
             "target": "Package",
             "version": "[1.2.0, )"
           },
-          "Lucene.Net": {
-            "target": "Package",
-            "version": "[4.8.0-beta00013, )"
-          },
-          "Lucene.Net.Analysis.Common": {
-            "target": "Package",
-            "version": "[4.8.0-beta00013, )"
-          },
-          "Lucene.Net.Queries": {
-            "target": "Package",
-            "version": "[4.8.0-beta00013, )"
-          },
-          "Lucene.Net.QueryParser": {
-            "target": "Package",
-            "version": "[4.8.0-beta00013, )"
-          },
           "Microsoft.AspNet.Mvc": {
             "target": "Package",
             "version": "[5.2.7, )"
@@ -12269,10 +12009,6 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[5.0.2, )"
-          },
-          "SixLabors.ImageSharp": {
-            "target": "Package",
-            "version": "[1.0.3, )"
           },
           "jQuery.UI.Combined": {
             "target": "Package",
