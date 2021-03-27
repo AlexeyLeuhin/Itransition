@@ -113,16 +113,16 @@
                 </div>
                 @if (!Model.IsAuthor)
                 {
-                    <div class="form-group">
-                        <textarea id="commentInput"></textarea>
-                        <button class="btn-success" onclick="sendComment();">Send</button>
+                    <div class="form-group comment">
+                        <textarea class="form-control" id="commentInput"></textarea>
+                        <button class="btn create-tale-button" onclick="sendComment();">Send</button>
                     </div>
                     <div id="comments">
                         @foreach (var comment in Model.Tale.Comments)
                         {
-                            <div class="container">
+                            <div class="container form-group comment">
                                 <div class="row">
-                                    <textarea readonly="readonly">@comment.Message</textarea>
+                                    <textarea class="form-control" readonly="readonly">@comment.Message</textarea>
                                 </div>
 
                                 <div class="row">

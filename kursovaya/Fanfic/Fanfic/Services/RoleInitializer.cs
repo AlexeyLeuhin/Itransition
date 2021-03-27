@@ -1,5 +1,6 @@
 ﻿using Fanfic.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace Fanfic.Services
@@ -13,10 +14,10 @@ namespace Fanfic.Services
             ADMIN
         }
 
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
         {
-            string adminEmail = "admin@gmail.com";
-            string password = "_Aa123456";
+            string adminEmail = config["Admin-Default-Email"];
+            string password = config["Admin-Default-Password"];
             if (await roleManager.FindByNameAsync(nameof(RoleType.ADMIN)) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(nameof(RoleType.ADMIN)));

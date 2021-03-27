@@ -24,7 +24,8 @@ namespace Fanfic
                 var services = scope.ServiceProvider;               
                 var userManager = services.GetRequiredService<UserManager<User>>();
                 var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                await RoleInitializer.InitializeAsync(userManager, rolesManager);                              
+                var configuration = services.GetRequiredService<IConfiguration>();
+                await RoleInitializer.InitializeAsync(userManager, rolesManager, configuration);                              
             }
 
             host.Run();

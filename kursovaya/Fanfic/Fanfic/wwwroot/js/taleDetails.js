@@ -15,7 +15,7 @@ var hubConnectionComments = new signalR.HubConnectionBuilder()
     .build();
 
 hubConnectionComments.on("PostComment", function (comment) {
-    createNewCommentVisualization(comment.message, comment.createTime, comment.author.name);
+    createNewCommentVisualization(comment.value.message, comment.value.createTime, comment.value.name);
 });
 
 hubConnectionComments.start();
@@ -234,22 +234,6 @@ function addChapter() {
 
 function deleteChapter(curChapterId) {
     let id = Number(curChapterId);
-    let li = document.getElementById(id);
-    draggableList.removeChild(li);
-    shoulNotBeSelected = true;
-    if (selectedItem && selectedItem.id == curChapterId) {
-        document.getElementById("chapterNameLabel").textContent = "";
-        document.getElementById("chapterText").value = "";
-        document.getElementById("chapterImage-" + id).hidden = true;
-        document.getElementById("likesNumber").hidden = true;
-        if (dropFile != null) {
-            dropFile.hidden = true;
-        }
-        likeButton.removeChild(document.getElementById("likeHeart"));
-        likeButton.hidden = true;
-        selectedItem = null;
-    }
-    checkNavigationElements();
     $.ajax({
         url: "TaleDetails?handler=DeleteChapter",
         data: { "chapterId": id, "taleId": taleId },
@@ -257,6 +241,24 @@ function deleteChapter(curChapterId) {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        success: function () {
+            let li = document.getElementById(id);
+            draggableList.removeChild(li);
+            shoulNotBeSelected = true;
+            if (selectedItem && selectedItem.id == curChapterId) {
+                document.getElementById("chapterNameLabel").textContent = "";
+                document.getElementById("chapterText").value = "";
+                document.getElementById("chapterImage-" + id).hidden = true;
+                document.getElementById("likesNumber").hidden = true;
+                if (dropFile != null) {
+                    dropFile.hidden = true;
+                }
+                likeButton.removeChild(document.getElementById("likeHeart"));
+                likeButton.hidden = true;
+                selectedItem = null;
+            }
+            checkNavigationElements();
         }
     });   
 }
@@ -380,10 +382,13 @@ function sendComment() {
 function createNewCommentVisualization(commentText, time, authorName) {
     let comment = document.createElement("div");
     comment.classList.add("container");
+    comment.classList.add("form-group");
+    comment.classList.add("comment");
     let txtdiv = document.createElement("div");
     txtdiv.classList.add("row");
     let txtarea = document.createElement("textarea");
     txtarea.readOnly = true;
+    txtarea.classList.add("form-control");
     txtarea.value = commentText;
     txtdiv.appendChild(txtarea);
     comment.appendChild(txtdiv);

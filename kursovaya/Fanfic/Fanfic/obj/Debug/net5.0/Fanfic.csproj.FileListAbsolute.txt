@@ -383,12 +383,6 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Areas\Identity\P
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Pages\TaleDetails.cshtml.g.cs
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
-D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Fanfic.RazorTargetAssemblyInfo.cache
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Fanfic.RazorTargetAssemblyInfo.cs
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Fanfic.Views.pdb
@@ -412,3 +406,9 @@ D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.AspNetCore.H
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Azure.SignalR.Common.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Azure.SignalR.dll
 D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\bin\Debug\net5.0\Microsoft.Azure.SignalR.Protocols.dll
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+D:\itra\itra_rep\kursovaya\Fanfic\Fanfic\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs

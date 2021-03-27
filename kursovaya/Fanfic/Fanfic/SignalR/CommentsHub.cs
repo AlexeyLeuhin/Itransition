@@ -1,5 +1,6 @@
 ﻿using Fanfic.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,8 @@ namespace Fanfic.SignalR
             tale.Comments.Add(comment);
             _dbContext.Update(tale);
             await _dbContext.SaveChangesAsync();
-            await this.Clients.All.SendAsync("PostComment", comment);
+            string createTime = comment.CreateTime.ToShortDateString();
+            await this.Clients.All.SendAsync("PostComment", new JsonResult(new { comment.Message, createTime, comment.Author.Name }));
         }
     }
 }

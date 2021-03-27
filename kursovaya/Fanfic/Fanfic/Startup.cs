@@ -1,5 +1,6 @@
 using Fanfic.Data;
 using Fanfic.Services;
+using Fanfic.Services.ChapterOrderedList;
 using Fanfic.Services.Filtrator;
 using Fanfic.Services.Sorter;
 using Fanfic.SignalR;
@@ -35,6 +36,7 @@ namespace Fanfic
             services.AddTransient<ITaleFilterService, TaleFiltator>();
             services.AddTransient<ITaleSortService, TaleSorter>();
             services.AddTransient<IBlobService, BlobService>();
+            services.AddTransient<IChaptersListRenumerator, ChaptersRenumerator>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
