@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
 <div class="row justify-content-md-center">
     <div class="col-md-8">
@@ -8,10 +9,10 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Identity/Account/Login">Sign In</a>
+                        <a class="nav-link" href="/Identity/Account/Login">@localizer["SignIn"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Identity/Account/Register">Sign Up</a>
+                        <a class="nav-link" href="/Identity/Account/Register">@localizer["SignUp"]</a>
                     </li>
                 </ul>
             </div>
@@ -26,7 +27,7 @@
     </div>
     <div class="col-md-4">
         <section>
-            <h5>Use another services to log in.</h5>
+            <h5>@localizer["AnotherService"]</h5>
             <hr />
             @{
                 <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">

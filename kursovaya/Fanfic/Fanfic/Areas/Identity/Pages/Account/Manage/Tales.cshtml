@@ -4,7 +4,7 @@
 @{
 
 }
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
@@ -16,7 +16,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create a new tale</h4>
+                    <h4 class="modal-title">@localizer["Create"]</h4>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>x</span>
                     </button>
@@ -25,23 +25,23 @@
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <label asp-for="Input.Name"></label>
+                            <label>@localizer["Name"]</label>
                             <input asp-for="Input.Name" id="inputName" class="form-control" />
                             <span asp-validation-for="Input.Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Input.Ganre"></label>
+                            <label>@localizer["Genre"]</label>
                             <select asp-for="Input.Ganre" id="inputGanre" class="form-control" asp-items="@Html.GetEnumSelectList<Tale.TaleGanre>()">
                             </select>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Input.ShortDescription"></label>
+                            <label>@localizer["ShortDescription"]</label>
                             <textarea asp-for="Input.ShortDescription" class="form-control" id="inputShortDescription"></textarea>
                             <span asp-validation-for="Input.ShortDescription" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label>Tags</label>
+                            <label>@localizer["Tags"]</label>
                             <div id="autocompleteDiv" class="row" style="margin-left:auto; margin-right:auto;">
                                 <input type="text" id="inputTag" class="form-control" />
                                 <button type="button" class="transparent-button" onclick="addTag();"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -52,8 +52,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" value="Add">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="@localizer["Cancel"]">
+                        <input type="submit" class="btn btn-success" value="@localizer["Add"]">
                     </div>
                 </form>
 
@@ -67,7 +67,7 @@
         <div class="col-8">
             @if (Model.Tales.Count == 0)
             {
-                <h4 style="text-align:center;">Tales not found</h4>
+            <h4 style="text-align:center;">@localizer["NotFound"]</h4>
             }
             else
             {
@@ -81,7 +81,7 @@
                             <p class="card-text">@tale.ShortDiscription</p>
                             <a href="/TaleDetails?taleId=@tale.Id" class="btn btn-primary">Read</a>
                             <form asp-page="Tales" asp-page-handler="DeleteTale" asp-route-Id="@tale.Id" method="post">
-                                <button  class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Delete</button>
                             </form>
                         </div>
                         <div class="card-footer text-muted">
@@ -105,17 +105,17 @@
             }
         </div>
         <div class="col-4">
-            <a href="#createTale" data-toggle="modal" class="btn create-tale-button">Create new</a>
+            <a href="#createTale" data-toggle="modal" class="btn create-tale-button">@localizer["CreateNewTale"]</a>
 
             <form method="get">
-                <h4>Filter by ganre:</h4>
+                <h4>@localizer["FilterByGenre"]</h4>
                 <select name="filterGanre" asp-items="@Html.GetEnumSelectList<Tale.TaleGanre>()" class="form-control">
                     <option value="">All</option>
                 </select>
-                <h4>Sort by:</h4>
+                <h4>@localizer["SortBy"]</h4>
                 <select name="sortType" asp-items="@Html.GetEnumSelectList<Fanfic.Services.Sorter.SortState>()" class="form-control">
                 </select>
-                <input type="submit" value="Filter" class="btn create-tale-button" />
+                <input type="submit" value="@localizer["Filter"]" class="btn create-tale-button" />
             </form>
         </div>
 

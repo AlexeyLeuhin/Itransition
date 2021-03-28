@@ -1,4 +1,5 @@
 ﻿@page
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @model Fanfic.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -6,8 +7,10 @@
     Html.AntiForgeryToken();
 }
 
+
+
 <div class="container">
-    <h2 style="margin-bottom: 40px;">Latest created tales</h2>
+    <h2 style="margin-bottom: 40px;">@localizer["LatestCreatedTales"]</h2>
     <div class="card-columns">
         @foreach (var tale in Model.DateSortedTales)
         {
@@ -38,7 +41,7 @@
 
     </div>
 
-    <h2 style="margin-top:80px; margin-bottom:40px;">Top Rating tales</h2>
+    <h2 style="margin-top:80px; margin-bottom:40px;">@localizer["TopRatedTales"]</h2>
     <div class="card-columns">
         @foreach (var tale in Model.RatingSortedTales)
         {
@@ -70,7 +73,7 @@
     </div>
 
 
-    <h2 style="margin-top:80px; margin-bottom:70px;">Most popular tags</h2>
+    <h2 style="margin-top:80px; margin-bottom:70px;">@localizer["MostPopularTags"]</h2>
     <div id="wordCloud"></div>
 
 </div>

@@ -327,6 +327,14 @@
         "runtime": {
           "Fanfic.dll": {}
         },
+        "resources": {
+          "en/Fanfic.resources.dll": {
+            "locale": "en"
+          },
+          "ru/Fanfic.resources.dll": {
+            "locale": "ru"
+          }
+        },
         "compile": {
           "Fanfic.dll": {}
         }

@@ -9,12 +9,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using static Fanfic.Services.RoleInitializer;
@@ -37,6 +41,7 @@ namespace Fanfic
             services.AddTransient<ITaleSortService, TaleSorter>();
             services.AddTransient<IBlobService, BlobService>();
             services.AddTransient<IChaptersListRenumerator, ChaptersRenumerator>();
+            services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -45,7 +50,24 @@ namespace Fanfic
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).
+                AddDataAnnotationsLocalization();
+
+            services.Configure<RequestLocalizationOptions>(opt =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("ru")
+                };
+                opt.DefaultRequestCulture = new RequestCulture("ru");
+                opt.SupportedCultures = supportedCultures;
+                opt.SupportedUICultures = supportedCultures;
+            });
+
+
             services.AddControllersWithViews();
+
             services.AddAuthentication()
                 .AddFacebook(facebookOptions =>
                     {
@@ -87,8 +109,10 @@ namespace Fanfic
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthentication(); 
             app.UseAuthorization();
+
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             app.UseEndpoints(endpoints =>
             {

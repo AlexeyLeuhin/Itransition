@@ -25,13 +25,16 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto"></ul>
-                <form class="form-inline" asp-page-handler="Search"   asp-page="/SearchResult">
+                <form class="form-inline" asp-page-handler="Search" asp-page="/SearchResult">
                     <input id="searchQuery" class="search" placeholder="Search" name="query">
                     <button class="transparent-button" type="submit"><i class="fa fa-search" style="color:white;" aria-hidden="true"></i></button>
                 </form>
                 <ul class="navbar-nav mr-auto"></ul>
             </div>
+
+            <partial name="_Culture" />
             <partial name="_LoginPartial">
+
         </nav>
     </header>
 

@@ -2,10 +2,11 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <ul class="nav flex-column nav-tabs">
-    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage"  asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage/ChangePassword" asp-page="./ChangePassword">Password</a></li>
-    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage/Tales" asp-page="./Tales">Your tales</a></li>
+    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage" asp-page="./Index">@localizer["Profile"]</a></li>
+    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage/ChangePassword" asp-page="./ChangePassword">@localizer["Password"]</a></li>
+    <li class="nav-item"><a class="nav-link manage-nav" id="/Identity/Account/Manage/Tales" asp-page="./Tales">@localizer["YourTales"]</a></li>
 </ul>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>

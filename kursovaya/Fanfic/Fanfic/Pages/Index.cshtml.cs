@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanfic.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,14 @@ namespace Fanfic.Pages
             IQueryable<Tale> taleSource = _dbContext.Tales.Include(c => c.Tags);
             DateSortedTales = await taleSource.OrderByDescending(t => t.CreationTime).Take(TALESTOPSIZE).ToListAsync();
             RatingSortedTales = await taleSource.OrderByDescending(t => t.AverageRating).Take(TALESTOPSIZE).ToListAsync();
+        }
+
+
+        public IActionResult OnPostCultureManagment(string culture)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) });
+            return LocalRedirect("/");
         }
 
         public async Task<IActionResult> OnGetTags()

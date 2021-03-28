@@ -1,8 +1,9 @@
 ﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-<h2>Your account</h2>
+<h2>@localizer["YourAccount"]</h2>
 
 <div>
     <hr />

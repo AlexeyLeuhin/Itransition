@@ -1,5 +1,6 @@
 ﻿@page
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @model Fanfic.Pages.SearchResultModel
 @{
     Layout = "../Views/Shared/_Layout.cshtml";
@@ -8,39 +9,39 @@
 <div class="container">
     @if (Model.Tales.Count != 0)
     {
-    <div class="card-columns">
-        @foreach (var tale in Model.Tales)
-        {
-        <div class="card text-white bg-dark current-tale" style="width: 18rem;">
-            <div class="card-body">
-                <h3 class="card-title text-center text-capitalize">@tale.Name</h3>
-                <h5 class="text-left" style="text-decoration: underline;">@tale.Ganre.ToString()</h5>
-                <p class="card-text">@tale.ShortDiscription</p>
-                <a href="/TaleDetails?taleId=@tale.Id" class="btn btn-primary">Read</a>
-            </div>
-            <div class="card-footer text-muted">
-                <div class="text-left">
-                    <div class="row" style="margin-left: 0px;">
-                        <input id="@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
-                        <span style="margin-left:10px;">@tale.NumberOfRatings votes</span>
+        <div class="card-columns">
+            @foreach (var tale in Model.Tales)
+            {
+                <div class="card text-white bg-dark current-tale" style="width: 18rem;">
+                    <div class="card-body">
+                        <h3 class="card-title text-center text-capitalize">@tale.Name</h3>
+                        <h5 class="text-left" style="text-decoration: underline;">@tale.Ganre.ToString()</h5>
+                        <p class="card-text">@tale.ShortDiscription</p>
+                        <a href="/TaleDetails?taleId=@tale.Id" class="btn btn-primary">Read</a>
                     </div>
-                    @tale.CreationTime.ToShortDateString()
+                    <div class="card-footer text-muted">
+                        <div class="text-left">
+                            <div class="row" style="margin-left: 0px;">
+                                <input id="@tale.Id" type="text" class="rating" value="@tale.AverageRating" data-size="xs" data-show-clear="false" data-show-caption="false">
+                                <span style="margin-left:10px;">@tale.NumberOfRatings votes</span>
+                            </div>
+                            @tale.CreationTime.ToShortDateString()
+                        </div>
+                        <p>
+                            @foreach (var tag in tale.Tags)
+                            {
+                                <a href="/SearchResult?handler=SearchByTag&tagName=@tag.Name" class="card-link">#@tag.Name</a>
+                            }
+                        </p>
+                    </div>
                 </div>
-                <p>
-                    @foreach (var tag in tale.Tags)
-                        {
-                            <a href="/SearchResult?handler=SearchByTag&tagName=@tag.Name" class="card-link">#@tag.Name</a>
-                        }
-                </p>
-            </div>
-        </div>
-        }
+            }
 
-    </div>
+        </div>
     }
     else
     {
-        <h2 style="margin-top:100px;">Ooops, nothing was found!</h2>
+        <h2 style="margin-top:100px;">@localizer["NothingFound"]</h2>
     }
 </div>
 

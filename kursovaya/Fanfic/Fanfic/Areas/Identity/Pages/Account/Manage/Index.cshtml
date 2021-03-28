@@ -4,8 +4,9 @@
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-<h4>@ViewData["Title"]</h4>
+<h4>@localizer["Profile"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
 
@@ -18,37 +19,33 @@
                 <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-group">
-                <label asp-for="Input.Name"></label>
+                <label>@localizer["Name"]</label>
                 <input asp-for="Input.Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Input.Age"></label>
+                <label>@localizer["Age"]</label>
                 <input asp-for="Input.Age" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
+                <label>@localizer["PhoneNumber"]</label>
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@localizer["Save"]</button>
         </form>
     </div>
 
     <div class="col-md-6">
         <img id="avatar" src="@Model.AvatarPath" class="rounded-circle profile-img" height="200" width="200" asp-append-version="true" />
-        <!--<div class="form-group">
-            <label>Change your avatar</label>
-            <input asp-for="Avatar" class="form-control" />
-        </div>-->
 
         <div id="divUploadFile" class="drop-place">
-            <p>Drop new avatar here</p>
+            <p>@localizer["DropAvatarHere"]</p>
         </div>
         <img id="imgLoading" src="~/gifs/loading.gif" style="display:none; width:150px; height:150px;" />
     </div>
 
-    
+
 
 </div>
 
