@@ -11,8 +11,8 @@ namespace Fanfic.Pages
 {
     public class IndexModel : PageModel
     {
-        private const int TALESTOPSIZE = 10;
-        private const int TAGSTOPSIZE = 15;
+        private const int TALESTOPSIZE = 6;
+        private const int TAGSTOPSIZE = 20;
         public List<Tale> DateSortedTales { get; set; } = new List<Tale>();
         public List<Tale> RatingSortedTales { get; set; } = new List<Tale>();
 

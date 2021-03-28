@@ -41,7 +41,7 @@ namespace Fanfic.Pages
             IQueryable<Comment> comments = _dbContext.Comments.Include(comment => comment.Tale).
                 Where(comment => EF.Functions.FreeText(comment.Message, query));
 
-            List<Tale> searchResult = await tales.ToListAsync();
+            HashSet<Tale> searchResult = tales.ToHashSet();
             foreach(var chapter in chapters.ToList())
             {
                 searchResult.Add(chapter.Tale);
@@ -50,7 +50,7 @@ namespace Fanfic.Pages
             {
                 searchResult.Add(comment.Tale);
             }
-            await OnGet(searchResult);
+            await OnGet(searchResult.ToList());
         }
     }
 }

@@ -34,6 +34,14 @@ namespace Fanfic.Data
             Historic
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != this.GetType()) return false;
+
+            Tale tale = (Tale)obj;
+            return (this.Id == tale.Id);
+        }
+
         public long Id { get; set; }
         public User User { get; set; }
         public string Name { get; set; }
